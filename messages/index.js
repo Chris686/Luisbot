@@ -8,7 +8,7 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
-var forecast = require("forecast")
+var forecast = require("forecast");
    var forecast = new Forecast({
    		service: 'darksky',
    		key: '48b5aa78fb42669745ca06ae428c56cc',
