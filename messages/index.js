@@ -8,6 +8,7 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
+var weather = require("Openweather-Node");
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
@@ -40,7 +41,17 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 })
 .matches('weather', (session, args) => {
     session.send('you asked for weather' + JSON.stringify(args));
-    
+    weather.now("Lyon",function(err, aData)
+	{	
+    if(err) session.send(err);
+    else
+    {
+        session.send(aData.getKelvinTemp())
+        session.send(aData.getDegreeTemp())
+        session.send(aData.getFahrenheitTemp())
+    }
+	})
+
 })
 .matches('Greeting', (session, args) => {
     session.send('Hi you');
