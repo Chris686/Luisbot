@@ -59,7 +59,6 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
    		return console.dir(err);
    	session.send(JSON.stringify(weather));
    });
-   session.send("after forecast");
 
 })
 .matches('Greeting', (session, args) => {
