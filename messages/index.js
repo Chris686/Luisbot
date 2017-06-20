@@ -9,6 +9,16 @@ var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
 var forecast = require("forecast")
+   var forecast = new Forecast({
+   		service: 'darksky',
+   		key: '48b5aa78fb42669745ca06ae428c56cc',
+   		units: 'celcius',
+   		cache: true, // Cache API requests
+   		ttl: { // How long to cache requests. Uses syntax from moment.js: http://momentjs.com/docs/#/durations/creating/
+   			minutes: 27,
+   			seconds: 45
+   		}
+   	});
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
@@ -42,16 +52,6 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 .matches('weather', (session, args) => {
     session.send('you asked for weather' + JSON.stringify(args));
    // Initialize
-   var forecast = new Forecast({
-   		service: 'darksky',
-   		key: '48b5aa78fb42669745ca06ae428c56cc',
-   		units: 'celcius',
-   		cache: true, // Cache API requests
-   		ttl: { // How long to cache requests. Uses syntax from moment.js: http://momentjs.com/docs/#/durations/creating/
-   			minutes: 27,
-   			seconds: 45
-   		}
-   	});
 
    // Retrieve weather information from coordinates (Sydney, Australia)
    forecast.get([-33.8683, 151.2086], function (err, weather) {
