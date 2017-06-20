@@ -44,7 +44,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
    // Initialize
    var forecast = new Forecast({
    		service: 'darksky',
-   		key: 'your-api-key',
+   		key: '48b5aa78fb42669745ca06ae428c56cc',
    		units: 'celcius',
    		cache: true, // Cache API requests
    		ttl: { // How long to cache requests. Uses syntax from moment.js: http://momentjs.com/docs/#/durations/creating/
