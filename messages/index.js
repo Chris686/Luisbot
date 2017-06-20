@@ -8,7 +8,7 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
-var weather = require("Openweather-Node");
+var forecast = require("forecast")
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
@@ -41,16 +41,32 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 })
 .matches('weather', (session, args) => {
     session.send('you asked for weather' + JSON.stringify(args));
-    weather.now("Lyon",function(err, aData)
-	{	
-    if(err) session.send(err);
-    else
-    {
-        session.send(aData.getKelvinTemp())
-        session.send(aData.getDegreeTemp())
-        session.send(aData.getFahrenheitTemp())
-    }
-	})
+   // Initialize
+   var forecast = new Forecast({
+   		service: 'darksky',
+   		key: 'your-api-key',
+   		units: 'celcius',
+   		cache: true, // Cache API requests
+   		ttl: { // How long to cache requests. Uses syntax from moment.js: http://momentjs.com/docs/#/durations/creating/
+   			minutes: 27,
+   			seconds: 45
+   		}
+   	});
+
+   // Retrieve weather information from coordinates (Sydney, Australia)
+   forecast.get([-33.8683, 151.2086], function (err, weather) {
+   	if (err)
+   		return console.dir(err);
+   	session.send(weather);
+   });
+
+   // Retrieve weather information, ignoring the cache
+   forecast.get([-33.8683, 151.2086], true, function (err, weather) {
+   	if (err)
+   		return console.dir(err);
+   	console.dir(weather);
+   });
+
 
 })
 .matches('Greeting', (session, args) => {
