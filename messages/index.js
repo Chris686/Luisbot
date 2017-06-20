@@ -57,7 +57,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
    forecast.get([-33.8683, 151.2086], function (err, weather) {
    	if (err)
    		return console.dir(err);
-   	session.send(weather);
+   	session.send(JSON.stringify(weather));
    });
    session.send("after forecast");
 
