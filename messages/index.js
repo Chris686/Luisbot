@@ -60,14 +60,6 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
    	session.send(weather);
    });
 
-   // Retrieve weather information, ignoring the cache
-   forecast.get([-33.8683, 151.2086], true, function (err, weather) {
-   	if (err)
-   		return console.dir(err);
-   	console.dir(weather);
-   });
-
-
 })
 .matches('Greeting', (session, args) => {
     session.send('Hi you');
