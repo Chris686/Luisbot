@@ -68,14 +68,14 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 })
 .matches('Greeting', (session, args) => {
     session.send('Hi you');
-	textAnalytics.sentiment()
-    .then((response) => {
-        session.send("Sentiment: " + JSON.stringify(response));
-		console.log('Got response', response);
-    })
-    .catch((err) => {
-        console.error('Encountered error making request:', err);
-    });
+	// textAnalytics.sentiment()
+    // .then((response) => {
+        // session.send("Sentiment: " + JSON.stringify(response));
+		// console.log('Got response', response);
+    // })
+    // .catch((err) => {
+        // console.error('Encountered error making request:', err);
+    // });
 
     
 })
