@@ -68,7 +68,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 })
 .matches('Greeting', (session, args) => {
     session.send('Hi you');
-	textAnalytics.sentiment({,session.message.text})
+	textAnalytics.sentiment(,session.message.text)
     .then((response) => {
         session.send("Sentiment: " + JSON.stringify(response));
 		console.log('Got response', response);
