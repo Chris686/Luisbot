@@ -10,8 +10,8 @@ var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
 const cognitiveServices = require('cognitive-services'); 
 const textAnalytics = new cognitiveServices.textAnalytics({
-    API_KEY: '74f79220e9af438ca623d96758a4c36c';
-});
+     API_KEY: '74f79220e9af438ca623d96758a4c36c'
+ });
 
 var Forecast = require("forecast");
    var forecast = new Forecast({
