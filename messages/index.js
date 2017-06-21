@@ -8,6 +8,11 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
+const cognitiveServices = require('cognitive-services'); 
+const textAnalytics = new cognitiveServices.textAnalytics({
+    API_KEY: '74f79220e9af438ca623d96758a4c36c';
+});
+
 var Forecast = require("forecast");
    var forecast = new Forecast({
    		service: 'darksky',
@@ -63,6 +68,15 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 })
 .matches('Greeting', (session, args) => {
     session.send('Hi you');
+	textAnalytics.sentiment({,session.message.text})
+    .then((response) => {
+        session.send("Sentiment: " + JSON.stringify(response));
+		console.log('Got response', response);
+    })
+    .catch((err) => {
+        console.error('Encountered error making request:', err);
+    });
+
     
 })
 .onDefault((session) => {
