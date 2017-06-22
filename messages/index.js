@@ -76,7 +76,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     // .catch((err) => {
         // console.error('Encountered error making request:', err);
     // });
-		
+		jsonBody =  '{"documents": [{"language": "en","id": "1","text": "First document"}]}'
 		 request.post({
 			 headers: {
 				 'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
@@ -84,7 +84,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 				 'Accept': 'application/json'
 			 },
 			 url: 'https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment',
-			 body: '"Hey dude"'
+			 body: jsonBody
 			 //: [{  "language" : "en",  "id": "1", "text": "Hey Dude"}]''
 		 },
 			 function (error, response, body) {
