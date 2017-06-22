@@ -12,7 +12,7 @@ var path = require('path');
 /*const textAnalytics = new cognitiveServices.textAnalytics({
       API_KEY: '74f79220e9af438ca623d96758a4c36c'
   });*/
-
+var request = require('request');
 var Forecast = require("forecast");
    var forecast = new Forecast({
    		service: 'darksky',
@@ -76,7 +76,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     // .catch((err) => {
         // console.error('Encountered error making request:', err);
     // });
-		var request = require('request');
+		
 		request.post({
 			headers: {
 				'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
