@@ -76,7 +76,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     // .catch((err) => {
         // console.error('Encountered error making request:', err);
     // });
-		jsonBody =  '{"documents": [{"language": "en","id": "1","text": "First document"}]}'
+		var jsonBody =  '{"documents": [{"language": "en","id": "1","text": "First document"}]}'
 		 request.post({
 			 headers: {
 				 'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
