@@ -8,10 +8,10 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
-const cognitiveServices = require('cognitive-services'); 
-const textAnalytics = new cognitiveServices.textAnalytics({
+//const cognitiveServices = require('cognitive-services'); 
+/*const textAnalytics = new cognitiveServices.textAnalytics({
       API_KEY: '74f79220e9af438ca623d96758a4c36c'
-  });
+  });*/
 
 var Forecast = require("forecast");
    var forecast = new Forecast({
@@ -76,7 +76,25 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     // .catch((err) => {
         // console.error('Encountered error making request:', err);
     // });
-
+		var request = require('request');
+		request.post({
+			headers: {
+				'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
+				'Content-Type': 'application/json',
+				'Accept': 'application/json'
+			},
+			url: 'https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment',
+			body: "" documents ": [
+					 {
+						 " language ": " en ",
+						 " id ": " 1 ",
+						 " text ": " Hey Dude "
+			}]"
+		},
+			function (error, response, body) {
+			session.send(JSON.stringify(body));
+			console.log(body);
+		});
     
 })
 .onDefault((session) => {
