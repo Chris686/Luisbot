@@ -68,15 +68,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 })
 .matches('Greeting', (session, args) => {
     session.send('Hi you');
-	// textAnalytics.sentiment()
-    // .then((response) => {
-        // session.send("Sentiment: " + JSON.stringify(response));
-		// console.log('Got response', response);
-    // })
-    // .catch((err) => {
-        // console.error('Encountered error making request:', err);
-    // });
-		var jsonBody =  '{"documents": [{"language": "en","id": "1","text": "First document"}]}'
+		var jsonBody =  '{"documents": [{"language": "en","id": "1","text": "' + session.message.text + '"}]}'
 		 request.post({
 			 headers: {
 				 'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
@@ -85,13 +77,9 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 			 },
 			 url: 'https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment',
 			 body: jsonBody
-			 //: [{  "language" : "en",  "id": "1", "text": "Hey Dude"}]''
 		 },
 			 function (error, response, body) {
 			 session.send(JSON.stringify(body));
-			 session.send(JSON.stringify(response));
-			 session.send(JSON.stringify(error));
-			 console.log(body);
 		 });
     
 })
