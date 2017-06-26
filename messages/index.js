@@ -102,16 +102,26 @@ bot.dialog('dialogGreeting',[
 	}
 ]).triggerAction({matches: 'Greeting'});
 
-bot.dialog('weatherDialog', [
-		function (session) {
-			// Retrieve weather information from coordinates (Sydney, Australia)
-			forecast.get([-33.8683, 151.2086], function (err, weather) {
-				if (err)
-					return console.dir(err);
-				session.send(JSON.stringify(weather));
-			});
-		}
-	]).triggerAction({matches: 'weather'});
+bot.dialog('weatherDialog',[
+	function (session){
+		session.send('weather');
+		//session.beginDialog('weatherDialog');
+	},
+	function (session, results){
+		session.send('Hi you2');
+	}
+]).triggerAction({matches: 'weather'});
+
+// bot.dialog('weatherDialog', [
+		// function (session) {
+			// // Retrieve weather information from coordinates (Sydney, Australia)
+			// forecast.get([-33.8683, 151.2086], function (err, weather) {
+				// if (err)
+					// return console.dir(err);
+				// session.send(JSON.stringify(weather));
+			// });
+		// }
+	// ]).triggerAction({matches: 'weather'});
 
 
 if (useEmulator) {
