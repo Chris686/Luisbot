@@ -111,14 +111,73 @@ bot.dialog('dialogweather',[
 				 return console.dir(err);
 			 session.send(JSON.stringify(weather));
 		 });
-		  next({ response: weather });
+		  //next({ response: weather });
 	},
 	function (session, results){
-		var destination = results.response;
-		session.send(destination);
+		//var destination = results.response;
+		session.send("Hi You 2");
 		
 	}
 ]).triggerAction({matches: 'weather'});
+
+bot.dialog('orderPizzaDialog', [
+    function (session, args) {
+        if (!args.continueOrder) {
+            session.userData.cart = [];
+            session.send("At anytime you can say 'cancel order', 'view cart', or 'checkout'.")
+        }
+        builder.Prompts.choice(session, "What would you like to add?", "Pizza|Drinks|Extras");
+    },
+    function (session, results) {
+        session.beginDialog('add' + results.response.entity);
+    },
+    function (session, results) {
+        if (results.response) {
+            session.userData.cart.push(results.response);
+        }
+        session.replaceDialog('orderPizzaDialog', { continueOrder: true });
+    }
+]).triggerAction({ 
+        matches: /order.*pizza/i,
+        confirmPrompt: "This will cancel the current order. Are you sure?"
+  })
+  .cancelAction('cancelOrderAction', "Order canceled.", { 
+      matches: /(cancel.*order|^cancel)/i,
+      confirmPrompt: "Are you sure?"
+  })
+  .beginDialogAction('viewCartAction', 'viewCartDialog', { matches: /view.*cart/i })
+  .beginDialogAction('checkoutAction', 'checkoutDialog', { matches: /checkout/i });
+
+// Dialog for showing the users cart
+bot.dialog('viewCartDialog', function (session) {
+    var msg;
+    var cart = session.userData.cart;
+    if (cart.length > 0) {
+        msg = "Items in your cart:";
+        for (var i = 0; i < cart.length; i++) {
+            msg += "\n* " + cart[i];
+        }
+    } else {
+        msg = "Your cart is empty.";
+    }
+    session.endDialog(msg);
+});
+
+// Dialog for checking out
+bot.dialog('checkoutDialog', function (session) {
+    var msg;
+    var cart = session.userData.cart;
+    if (cart.length > 0) {
+        msg = "Your order is on its way.";
+    } else {
+        msg = "Your cart is empty.";
+    }
+    delete session.userData.cart;
+    session.endConversation(msg);
+});
+
+
+
 
 if (useEmulator) {
     
