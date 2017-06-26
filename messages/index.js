@@ -110,12 +110,12 @@ bot.dialog('dialogGreeting',[
 			session.send('Hi ' + session.userData.name);
 		}
 		else{
-			session.beginDialog('profile');
+			session.beginDialog('userProfile');
 		}
 	}
 ]).triggerAction({matches: 'Greeting'});
 
-bot.dialog('profile', [
+bot.dialog('userProfile', [
     function (session, args, next) {
         session.dialogData.profile = args || {}; // Set the profile or create the object.
         if (!session.dialogData.profile.name) {
