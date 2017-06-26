@@ -118,7 +118,7 @@ bot.dialog('dialogGreeting',[
 bot.dialog('userProfile', [
     function (session, args, next) {
         session.dialogData.profile = args || {}; // Set the profile or create the object.
-        if (!session.dialogData.profile.name) {
+        if (util.isNullOrUndefined(session.dialogData.profile.name)) {
             builder.Prompts.text(session, "What's your name?");
         } else {
             next(); // Skip if we already have this info.
@@ -129,7 +129,7 @@ bot.dialog('userProfile', [
             // Save user's name if we asked for it.
             session.dialogData.profile.name = results.response;
         }
-        if (!session.dialogData.profile.company) {
+        if (util.isNullOrUndefined(session.dialogData.profile.company)) {
             builder.Prompts.text(session, "What company do you work for?");
         } else {
             next(); // Skip if we already have this info.
