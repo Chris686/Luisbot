@@ -93,16 +93,20 @@ bot.dialog('/', intents);    */
 
 bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
-	 function (session) {
-        session.send('Hi You');
-    }
-
+	function (session){
+		session.send('Hi you');
+	},
+	function (session, results){
+		session.send('Hi you2');
+	}
 ]).triggerAction({matches: 'Greeting'});
 
 bot.dialog('dialogweather',[
 	function (session){
 		session.send('You asked for weather');
-		//session.beginDialog('dialogGreeting')
+	},
+	function (session, results){
+		session.send('Hi you2');
 	}
 ]).triggerAction({matches: 'weather'});
 
