@@ -106,7 +106,7 @@ bot.dialog('/', intents);    */
 bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
 	function (session){
-		if(util.isNullOrUndefined(session.userData.name)){
+		if(!util.isNullOrUndefined(session.userData.name)){
 			session.send('Hi ' + session.userData.name);
 		}
 		else{
