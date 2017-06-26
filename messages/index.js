@@ -111,6 +111,7 @@ bot.dialog('dialogweather',[
 				 return console.dir(err);
 			 session.send(JSON.stringify(weather));
 		 });
+		 next();
 	},
 	function (session, results){
 		session.send('Hi you2');
