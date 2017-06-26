@@ -101,6 +101,14 @@ bot.dialog('dialogGreeting',[
 	}
 ]).triggerAction({matches: 'Greeting'});
 
+bot.dialog('dialogweather',[
+	function (session){
+		session.send('Hi you');
+	},
+	function (session, results){
+		session.send('Hi you2');
+	}
+]).triggerAction({matches: 'weather'});
 
 if (useEmulator) {
     
