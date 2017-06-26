@@ -36,7 +36,7 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 
 var bot = new builder.UniversalBot(connector, [
     function (session, args, next) {
-        if (!session.userData.name) {
+        if (session.userData.name !== 'undefined') {
             session.beginDialog('profile');
         } else {
             next();
@@ -104,7 +104,7 @@ bot.dialog('/', intents);    */
 bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
 	function (session){
-		if(!session.userData.name){
+		if(session.userData.name !== 'undefined'){
 			session.send('Hi ' + session.userData.name);
 		}
 		else{
