@@ -103,12 +103,13 @@ bot.dialog('dialogGreeting',[
 ]).triggerAction({matches: 'Greeting'});
 
 bot.dialog('weatherDialog',[
-// Retrieve weather information from coordinates (Sydney, Australia)
+	function (session){
+	// Retrieve weather information from coordinates (Sydney, Australia)
    forecast.get([-33.8683, 151.2086], function (err, weather) {
    	if (err)
    		return console.dir(err);
    	session.send(JSON.stringify(weather));
-   });
+	});}
 ]).triggerAction({'weather'});
 
 
