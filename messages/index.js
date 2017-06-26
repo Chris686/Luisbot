@@ -104,6 +104,8 @@ bot.dialog('dialogGreeting',[
 bot.dialog('dialogweather',[
 	function (session) {
 		session.send('You asked for weather');
+		session.send('You asked for weather3');
+		session.send('You asked for weather3');
 		// forecast.get([-33.8683, 151.2086], function (err, weather) {
 			// if (err)
 				// return console.dir(err);
