@@ -92,9 +92,34 @@ bot.dialog('/', intents);    */
 
 bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
-	function (session){
-		session.send('Hi you');
-	}
+ function (session, args, next) {
+        session.dialogData.profile = args || {};
+        if (!args.profile.name) {
+            builder.Prompts.text(session, "Hi! What is your name?");
+        } else {
+            next();
+        }
+    },
+    function (session, results, next) {
+        if (results.response) {
+            session.dialogData.profile.name = results.response;
+        }
+        if (!args.profile.email) {
+            builder.Prompts.text(session, "What's your email address?");
+        } else {
+            next();
+        }
+    },
+    function (session, results) {
+        if (results.response) {
+            session.dialogData.profile.email = results.response;
+        }
+        session.endDialogWithResult({ response: session.dialogData.profile })
+    }
+
+	// function (session){
+		// session.send('Hi you');
+	// }
 ]).triggerAction({matches: 'Greeting'});
 
 
