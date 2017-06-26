@@ -34,7 +34,18 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
     openIdMetadata: process.env['BotOpenIdMetadata']
 });
 
-var bot = new builder.UniversalBot(connector);
+var bot = new builder.UniversalBot(connector, [
+    function (session, args, next) {
+        if (!session.userData.name) {
+            session.beginDialog('profile');
+        } else {
+            next();
+        }
+    },
+    function (session, results) {
+        session.send('Hello %s!', session.userData.name);
+    }
+]);
 bot.localePath(path.join(__dirname, './locale'));
 
 // Make sure you add code to validate these fields
@@ -88,12 +99,25 @@ var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 });
 
 bot.dialog('/', intents);    */
+
+
 bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
 	function (session){
 		session.send('Hi you');
 	}
 ]).triggerAction({matches: 'Greeting'});
+
+bot.dialog('profile', [
+    function (session) {
+        builder.Prompts.text(session, 'Hi! What is your name?');
+    },
+    function (session, results) {
+        session.userData.name = results.response;
+        session.endDialog();
+    }
+]);
+
 
 
 if (useEmulator) {
