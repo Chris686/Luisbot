@@ -46,11 +46,11 @@ const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v1/application?id=' +
 
 // Main dialog with LUIS
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
-var intents = new builder.IntentDialog({ recognizers: [recognizer] })
+//var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 /*
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
-.matches('None', (session, args) => {
+/*.matches('None', (session, args) => {
     session.send('Hi, none Intent \'%s\'.', session.message.text);
     
 })
@@ -87,7 +87,14 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.send('Sorry, I did not understand \'%s\'.', session.message.text);
 });
 
-bot.dialog('/', intents);    
+bot.dialog('/', intents);    */
+bot.recognizer(recognizer);
+bot.dialog('dialogGreeting'[
+	function session{
+		session.send('Hi you');
+	}
+]).triggerAction({matches: 'Greeting'});
+
 
 if (useEmulator) {
     var restify = require('restify');
