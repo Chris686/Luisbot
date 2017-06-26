@@ -36,18 +36,9 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
     openIdMetadata: process.env['BotOpenIdMetadata']
 });
 
-var bot = new builder.UniversalBot(connector, [
-    function (session, args, next) {
-        if (util.isNullOrUndefined(session.userData.name)) {
-            session.beginDialog('profile');
-        } else {
-            next();
-        }
-    },
-    function (session, results) {
-        session.send('Hello %s!', session.userData.name);
-    }
-]);
+var bot = new builder.UniversalBot(connector, function (session) { 
+    session.send("Say 'order pizza' to start a new order. ");
+);
 bot.localePath(path.join(__dirname, './locale'));
 
 // Make sure you add code to validate these fields
@@ -120,8 +111,8 @@ bot.dialog('userProfile', [
         builder.Prompts.text(session, 'Hi! What is your name?');
     },
     // Step 2
-    function (session, results) {
-        session.endDialog('Hello %s!', results.response);
+    function (session){//, results) {
+        session.endDialog('Hello %s!');
     }
 
     // function (session, args, next) {
