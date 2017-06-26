@@ -102,7 +102,7 @@ bot.dialog('dialogGreeting',[
 ]).triggerAction({matches: 'Greeting'});
 
 bot.dialog('dialogweather',[
-	function (session) {
+	function (session, args, next) {
 		session.send('You asked for weather');
 		session.send('You asked for weather3');
 		session.send('You asked for weather3');
@@ -111,10 +111,12 @@ bot.dialog('dialogweather',[
 				 return console.dir(err);
 			 session.send(JSON.stringify(weather));
 		 });
-		 next();
+		  next({ response: weather });
 	},
 	function (session, results){
-		session.send('Hi you2');
+		var destination = results.response;
+		session.send(destination);
+		
 	}
 ]).triggerAction({matches: 'weather'});
 
