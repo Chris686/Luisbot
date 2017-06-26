@@ -90,7 +90,7 @@ var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 bot.dialog('/', intents);    */
 bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
-	function session{
+	function (session){
 		session.send('Hi you');
 	}
 ]).triggerAction({matches: 'Greeting'});
