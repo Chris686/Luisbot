@@ -95,22 +95,22 @@ bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
 	function (session){
 		session.send('Hi you');
-		session.beginDialog('weatherDialog');
+		//session.beginDialog('weatherDialog');
 	},
 	function (session, results){
 		session.send('Hi you2');
 	}
 ]).triggerAction({matches: 'Greeting'});
 
-bot.dialog('weatherDialog',[
-	function (session){
-		session.send('weather');
-		//session.beginDialog('weatherDialog');
-	},
-	function (session, results){
-		session.send('Hi you2');
-	}
-]).triggerAction({matches: 'weather'});
+// bot.dialog('weatherDialog',[
+	// function (session){
+		// session.send('weather');
+		// //session.beginDialog('weatherDialog');
+	// },
+	// function (session, results){
+		// session.send('Hi you2');
+	// }
+// ]).triggerAction({matches: 'weather'});
 
 // bot.dialog('weatherDialog', [
 		// function (session) {
