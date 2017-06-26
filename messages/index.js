@@ -103,7 +103,7 @@ bot.dialog('dialogGreeting',[
 
 bot.dialog('dialogweather',[
 	function (session){
-		session.send('Hi you');
+		session.send('You asked for weather');
 	},
 	function (session, results){
 		session.send('Hi you2');
