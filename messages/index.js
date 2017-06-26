@@ -97,7 +97,7 @@ bot.dialog('dialogGreeting',[
         builder.Prompts.text(session, 'Hi! What is your name?');
     },
     function (session, results) {
-        session.userData.name = results.response;
+        //session.userData.name = results.response;
         session.endDialog();
     }
 
