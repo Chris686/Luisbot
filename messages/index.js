@@ -124,21 +124,22 @@ bot.dialog('userProfile', [
             next(); // Skip if we already have this info.
         }
     },
-    function (session, results, next) {
-        if (results.response) {
-            // Save user's name if we asked for it.
-            session.dialogData.profile.name = results.response;
-        }
-        if (util.isNullOrUndefined(session.dialogData.profile.company)) {
-            builder.Prompts.text(session, "What company do you work for?");
-        } else {
-            next(); // Skip if we already have this info.
-        }
-    },
+    // function (session, results, next) {
+        // if (results.response) {
+            // // Save user's name if we asked for it.
+            // session.dialogData.profile.name = results.response;
+        // }
+        // if (util.isNullOrUndefined(session.dialogData.profile.company)) {
+            // builder.Prompts.text(session, "What company do you work for?");
+        // } 
+		// else {
+            // next(); // Skip if we already have this info.
+        // }
+    // },
     function (session, results) {
         if (results.response) {
             // Save company name if we asked for it.
-            session.dialogData.profile.company = results.response;
+            session.dialogData.profile.name = results.response;
         }
         session.endDialogWithResult({ response: session.dialogData.profile });
     }
