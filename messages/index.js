@@ -116,14 +116,31 @@ bot.dialog('dialogGreeting',[
 ]).triggerAction({matches: 'Greeting'});
 
 bot.dialog('profile', [
-    function (session) {
-        builder.Prompts.text(session, 'Hi! What is your name?');
+    function (session, args, next) {
+        session.dialogData.profile = args || {}; // Set the profile or create the object.
+        if (!session.dialogData.profile.name) {
+            builder.Prompts.text(session, "What's your name?");
+        } else {
+            next(); // Skip if we already have this info.
+        }
+    },
+    function (session, results, next) {
+        if (results.response) {
+            // Save user's name if we asked for it.
+            session.dialogData.profile.name = results.response;
+        }
+        if (!session.dialogData.profile.company) {
+            builder.Prompts.text(session, "What company do you work for?");
+        } else {
+            next(); // Skip if we already have this info.
+        }
     },
     function (session, results) {
-        builder.Prompts.text(session, 'Are you' + results.response);
-		//session.send("Are you " + results.response)
-		session.userData.name = results.response;
-        session.endDialog();
+        if (results.response) {
+            // Save company name if we asked for it.
+            session.dialogData.profile.company = results.response;
+        }
+        session.endDialogWithResult({ response: session.dialogData.profile });
     }
 ]);
 
