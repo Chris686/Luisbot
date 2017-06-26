@@ -120,7 +120,8 @@ bot.dialog('profile', [
         builder.Prompts.text(session, 'Hi! What is your name?');
     },
     function (session, results) {
-        session.userData.name = results.response;
+        session.send("Are you " + results.response)
+		session.userData.name = results.response;
         session.endDialog();
     }
 ]);
