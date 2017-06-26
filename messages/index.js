@@ -102,8 +102,13 @@ bot.dialog('dialogGreeting',[
 ]).triggerAction({matches: 'Greeting'});
 
 bot.dialog('dialogweather',[
-	function (session){
+	function (session) {
 		session.send('You asked for weather');
+		forecast.get([-33.8683, 151.2086], function (err, weather) {
+			if (err)
+				return console.dir(err);
+			session.send(JSON.stringify(weather));
+		});
 	},
 	function (session, results){
 		session.send('Hi you2');
