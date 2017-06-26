@@ -8,8 +8,6 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
-const util = require('util');
-
 //const cognitiveServices = require('cognitive-services'); 
 /*const textAnalytics = new cognitiveServices.textAnalytics({
       API_KEY: '74f79220e9af438ca623d96758a4c36c'
@@ -36,9 +34,7 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
     openIdMetadata: process.env['BotOpenIdMetadata']
 });
 
-var bot = new builder.UniversalBot(connector, function (session) { 
-    session.send("Say 'order pizza' to start a new order. ");
-);
+var bot = new builder.UniversalBot(connector);
 bot.localePath(path.join(__dirname, './locale'));
 
 // Make sure you add code to validate these fields
@@ -97,53 +93,9 @@ bot.dialog('/', intents);    */
 bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
 	function (session){
-		if(!util.isNullOrUndefined(session.userData.name)){
-			session.send('Hi ' + session.userData.name);
-		}
-		else{
-			session.beginDialog('userProfile', session.userData.profile);
-		}
+		session.send('Hi you');
 	}
 ]).triggerAction({matches: 'Greeting'});
-
-bot.dialog('userProfile', [
-	function (session) {
-        builder.Prompts.text(session, 'Hi! What is your name?');
-    },
-    // Step 2
-    function (session){//, results) {
-        session.endDialog('Hello %s!');
-    }
-
-    // function (session, args, next) {
-        // session.dialogData.profile = args || {}; // Set the profile or create the object.
-        // if (util.isNullOrUndefined(session.dialogData.profile.name)) {
-            // builder.Prompts.text(session, "What's your name?");
-        // } else {
-            // next(); // Skip if we already have this info.
-        // }
-    // },
-    // function (session, results, next) {
-        // if (results.response) {
-            // // Save user's name if we asked for it.
-            // session.dialogData.profile.name = results.response;
-        // }
-        // if (util.isNullOrUndefined(session.dialogData.profile.company)) {
-            // builder.Prompts.text(session, "What company do you work for?");
-        // } 
-		// else {
-            // next(); // Skip if we already have this info.
-        // }
-    // },
-    // function (session, results) {
-        // if (results.response) {
-            // // Save company name if we asked for it.
-            // session.dialogData.profile.name = results.response;
-        // }
-        // session.endDialogWithResult({ response: session.dialogData.profile });
-    // }
-]);
-
 
 
 if (useEmulator) {
