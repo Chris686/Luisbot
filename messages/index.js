@@ -177,6 +177,10 @@ bot.dialog('checkoutDialog', function (session) {
 });
 
 
+bot.dialog('addPizza', function (session){
+	session.send("Add Pizza");
+});
+
 
 
 if (useEmulator) {
