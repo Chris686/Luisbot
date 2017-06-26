@@ -116,14 +116,22 @@ bot.dialog('dialogGreeting',[
 ]).triggerAction({matches: 'Greeting'});
 
 bot.dialog('userProfile', [
-    function (session, args, next) {
-        session.dialogData.profile = args || {}; // Set the profile or create the object.
-        if (util.isNullOrUndefined(session.dialogData.profile.name)) {
-            builder.Prompts.text(session, "What's your name?");
-        } else {
-            next(); // Skip if we already have this info.
-        }
+	function (session) {
+        builder.Prompts.text(session, 'Hi! What is your name?');
     },
+    // Step 2
+    function (session, results) {
+        session.endDialog('Hello %s!', results.response);
+    }
+
+    // function (session, args, next) {
+        // session.dialogData.profile = args || {}; // Set the profile or create the object.
+        // if (util.isNullOrUndefined(session.dialogData.profile.name)) {
+            // builder.Prompts.text(session, "What's your name?");
+        // } else {
+            // next(); // Skip if we already have this info.
+        // }
+    // },
     // function (session, results, next) {
         // if (results.response) {
             // // Save user's name if we asked for it.
@@ -136,13 +144,13 @@ bot.dialog('userProfile', [
             // next(); // Skip if we already have this info.
         // }
     // },
-    function (session, results) {
-        if (results.response) {
-            // Save company name if we asked for it.
-            session.dialogData.profile.name = results.response;
-        }
-        session.endDialogWithResult({ response: session.dialogData.profile });
-    }
+    // function (session, results) {
+        // if (results.response) {
+            // // Save company name if we asked for it.
+            // session.dialogData.profile.name = results.response;
+        // }
+        // session.endDialogWithResult({ response: session.dialogData.profile });
+    // }
 ]);
 
 
