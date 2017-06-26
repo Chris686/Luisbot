@@ -104,7 +104,12 @@ bot.dialog('/', intents);    */
 bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
 	function (session){
-		session.send('Hi you');
+		if(!session.userData.name){
+			session.send('Hi ' + session.userData.name);
+		}
+		else{
+			session.send('Hi you');
+		}
 	}
 ]).triggerAction({matches: 'Greeting'});
 
