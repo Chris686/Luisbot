@@ -8,6 +8,8 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
+const util = require('util');
+
 //const cognitiveServices = require('cognitive-services'); 
 /*const textAnalytics = new cognitiveServices.textAnalytics({
       API_KEY: '74f79220e9af438ca623d96758a4c36c'
@@ -36,7 +38,7 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 
 var bot = new builder.UniversalBot(connector, [
     function (session, args, next) {
-        if (session.userData.name !== 'undefined') {
+        if (util.isNullOrUndefined(session.userData.name)) {
             session.beginDialog('profile');
         } else {
             next();
@@ -104,7 +106,7 @@ bot.dialog('/', intents);    */
 bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
 	function (session){
-		if(session.userData.name !== 'undefined'){
+		if(util.isNullOrUndefined(session.userData.name)){
 			session.send('Hi ' + session.userData.name);
 		}
 		else{
