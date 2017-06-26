@@ -110,7 +110,7 @@ bot.dialog('dialogGreeting',[
 			session.send('Hi ' + session.userData.name);
 		}
 		else{
-			session.beginDialog('userProfile');
+			session.beginDialog('userProfile', session.userData.profile);
 		}
 	}
 ]).triggerAction({matches: 'Greeting'});
