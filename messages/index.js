@@ -8,12 +8,12 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
-var restify = require('restify');
-var request = require('request');
+
 //const cognitiveServices = require('cognitive-services'); 
 /*const textAnalytics = new cognitiveServices.textAnalytics({
       API_KEY: '74f79220e9af438ca623d96758a4c36c'
   });*/
+var request = require('request');
 var Forecast = require("forecast");
    var forecast = new Forecast({
    		service: 'darksky',
@@ -95,33 +95,11 @@ bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
 	function (session){
 		session.send('Hi you');
-		//session.beginDialog('weatherDialog');
 	},
 	function (session, results){
 		session.send('Hi you2');
 	}
 ]).triggerAction({matches: 'Greeting'});
-
-// bot.dialog('weatherDialog',[
-	// function (session){
-		// session.send('weather');
-		// //session.beginDialog('weatherDialog');
-	// },
-	// function (session, results){
-		// session.send('Hi you2');
-	// }
-// ]).triggerAction({matches: 'weather'});
-
-// bot.dialog('weatherDialog', [
-		// function (session) {
-			// // Retrieve weather information from coordinates (Sydney, Australia)
-			// forecast.get([-33.8683, 151.2086], function (err, weather) {
-				// if (err)
-					// return console.dir(err);
-				// session.send(JSON.stringify(weather));
-			// });
-		// }
-	// ]).triggerAction({matches: 'weather'});
 
 
 if (useEmulator) {
