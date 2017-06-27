@@ -189,7 +189,10 @@ bot.dialog('addPizza', [
     function (session, results) {
         session.endDialog('Hello %s!', results.response);
     }
-]);
+]).triggerAction({ 
+        matches: /add.*pizza/i,
+        confirmPrompt: "This will cancel the current order. Are you sure?"
+  });
 
 
 
