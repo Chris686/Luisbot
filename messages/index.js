@@ -95,13 +95,14 @@ bot.recognizer(recognizer);
 bot.dialog('dialogGreeting', [
 		function (session) {
 			builder.Prompts.text(session, 'Hi! What is your name?');
-		},
-		function (session, results) {
-			if(results)
-				{
-					builder.Prompts.text(session, results);
-				}
 		}
+		// ,
+		// function (session, results) {
+			// if(results)
+				// {
+					// builder.Prompts.text(session, results);
+				// }
+		// }
 	]).triggerAction({
 	matches: 'Greeting'
 });
