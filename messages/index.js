@@ -184,11 +184,12 @@ bot.dialog('addPizza', [
     // Step 1
     function (session) {
         builder.Prompts.text(session, 'Add Pizza');
-    },
-    // Step 2
-    function (session, results) {
-        session.endDialog('Hello %s!', results.response);
     }
+	// ,
+    // // Step 2
+    // function (session, results) {
+        // session.endDialog('Hello %s!', results.response);
+    // }
 ]).triggerAction({ 
         matches: /add.*pizza/i,
         confirmPrompt: "This will cancel the current order. Are you sure?"
