@@ -105,8 +105,7 @@ bot.dialog('dialogGreeting',[
 	function (session, results){
 		session.send('Hi you2');
 	}
-]);
-//.triggerAction({matches: 'Greeting'});
+]).triggerAction({matches: 'Greeting'});
 
 bot.dialog('dialogweather',[
 	function (session, args, next) {
