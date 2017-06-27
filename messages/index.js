@@ -95,9 +95,11 @@ bot.recognizer(recognizer);
 bot.dialog('dialogGreeting',[
 	function (session) {
         builder.Prompts.text(session, 'Hi! What is your name?');
-    },
+    }
+	,
     function (session, results) {
-        session.userData.name = results.response;
+        builder.Prompts.text(session, results.response);
+		//session.userData.name = results.response;
         session.endDialog();
     }
 ]).triggerAction({matches: 'Greeting'});
