@@ -132,7 +132,7 @@ bot.dialog('orderPizzaDialog', [
 		builder.Prompts.text(session, 'Hi! What is your name?' + results.response.entity);
 		//session.send("Hi You 2");
 		//console.log(results.response.entity);
-        //session.beginDialog('add' + results.response.entity);
+        session.beginDialog('add' + results.response.entity);
     },
     function (session, results) {
         if (results.response) {
@@ -181,7 +181,8 @@ bot.dialog('checkoutDialog', function (session) {
 
 
 bot.dialog('addPizza', function (session){
-	session.send("Add Pizza");
+	//session.send("Add Pizza");
+	builder.Prompts.text(session, 'add Pizza');
 });
 
 
