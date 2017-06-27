@@ -180,10 +180,16 @@ bot.dialog('checkoutDialog', function (session) {
 });
 
 
-bot.dialog('addPizza', function (session){
-	//session.send("Add Pizza");
-	builder.Prompts.text(session, 'add Pizza');
-});
+bot.dialog('addPizza', [
+    // Step 1
+    function (session) {
+        builder.Prompts.text(session, 'Add Pizza');
+    },
+    // Step 2
+    function (session, results) {
+        session.endDialog('Hello %s!', results.response);
+    }
+]);
 
 
 
