@@ -48,7 +48,6 @@ const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v1/application?id=' +
 // Main dialog with LUIS
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 //var intents = new builder.IntentDialog({ recognizers: [recognizer] })
-//.macthes('Greeting','dialogGreeting');
 /*
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
@@ -93,22 +92,14 @@ bot.dialog('/', intents);    */
 
 
 bot.recognizer(recognizer);
-bot.dialog('dialogGreeting', [
-		function (session) {
-			session.send('You asked for weather');
-			//builder.Prompts.text(session, 'Hi! What is your name?');
-		}
-		,
-		 function (session, results) {
-			 session.send('You asked for weather');
-			// if(results)
-				// {
-					// builder.Prompts.text(session, results);
-				// }
-		}
-	]).triggerAction({
-	matches: 'Greeting'
-});
+bot.dialog('dialogGreeting',[
+	function (session){
+		session.send('Hi you');
+	},
+	function (session, results){
+		session.send('Hi you2');
+	}
+]).triggerAction({matches: 'Greeting'});
 
 bot.dialog('dialogweather',[
 	function (session, args, next) {
