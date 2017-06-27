@@ -129,7 +129,7 @@ bot.dialog('orderPizzaDialog', [
         builder.Prompts.choice(session, "What would you like to add?", "Pizza|Drinks|Extras");
     },
     function (session, results) {
-		builder.Prompts.text(session, 'Hi! What is your name?' + results.response.entity);
+		//builder.Prompts.text(session, 'Hi! What is your name?' + results.response.entity);
 		//session.send("Hi You 2");
 		//console.log(results.response.entity);
         session.beginDialog('add' + results.response.entity);
