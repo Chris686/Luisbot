@@ -97,7 +97,7 @@ bot.dialog('dialogGreeting', [
 			builder.Prompts.text(session, 'Hi! What is your name?');
 		},
 		function (session, results) {
-			session.endDialogWithResult(results);
+			builder.Prompts.text(session, results);
 		}
 	]).triggerAction({
 	matches: 'Greeting'
