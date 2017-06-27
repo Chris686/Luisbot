@@ -91,8 +91,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 .onDefault((session) => {
     session.send('Sorry, I did not understand \'%s\'.', session.message.text);
 });
-
-bot.dialog('/', intents);    */
+*/
+bot.dialog('/', intents);    
 
 
 //bot.recognizer(recognizer);
