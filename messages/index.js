@@ -105,7 +105,7 @@ bot.dialog('dialogGreeting', [
 				// {
 					// builder.Prompts.text(session, results);
 				// }
-		// }
+		}
 	]).triggerAction({
 	matches: 'Greeting'
 });
