@@ -108,7 +108,7 @@ bot.dialog('dialogGreeting',[
 	function (session, results){
 		session.send('Hi you2');
 	}
-]).triggerAction({matches: 'Greeting'});
+]);//.triggerAction({matches: 'Greeting'});
 
 bot.dialog('dialogweather',[
 	function (session, args, next) {
@@ -127,7 +127,7 @@ bot.dialog('dialogweather',[
 		session.send("Hi You 2");
 		
 	}
-]).triggerAction({matches: 'weather'});
+]);//.triggerAction({matches: 'weather'});
 
 bot.dialog('orderPizzaDialog', [
     function (session, args) {
@@ -200,10 +200,10 @@ bot.dialog('addPizza', [
     // function (session, results) {
         // session.endDialog('Hello %s!', results.response);
     // }
-]).triggerAction({ 
+]);/*.triggerAction({ 
         matches: /add.*pizza/i,
         confirmPrompt: "This will cancel the current order. Are you sure?"
-  });
+  });*/
 
 
 
