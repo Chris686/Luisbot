@@ -100,110 +100,110 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 bot.dialog('/', intents);    
 
 
-//bot.recognizer(recognizer);
-bot.dialog('dialogGreeting',[
-	function (session){
-		session.send('Hi you');
-	},
-	function (session, results){
-		session.send('Hi you2');
-	}
-]);//.triggerAction({matches: 'Greeting'});
+// //bot.recognizer(recognizer);
+// bot.dialog('dialogGreeting',[
+	// function (session){
+		// session.send('Hi you');
+	// },
+	// function (session, results){
+		// session.send('Hi you2');
+	// }
+// ]);//.triggerAction({matches: 'Greeting'});
 
-bot.dialog('dialogweather',[
-	function (session, args, next) {
-		session.send('You asked for weather');
-		session.send('You asked for weather3');
-		session.send('You asked for weather3');
-		 forecast.get([-33.8683, 151.2086], function (err, weather) {
-			 if (err)
-				 return console.dir(err);
-			 session.send(JSON.stringify(weather));
-		 });
-		  //next({ response: weather });
-	},
-	function (session, results){
-		//var destination = results.response;
-		session.send("Hi You 2");
+// bot.dialog('dialogweather',[
+	// function (session, args, next) {
+		// session.send('You asked for weather');
+		// session.send('You asked for weather3');
+		// session.send('You asked for weather3');
+		 // forecast.get([-33.8683, 151.2086], function (err, weather) {
+			 // if (err)
+				 // return console.dir(err);
+			 // session.send(JSON.stringify(weather));
+		 // });
+		  // //next({ response: weather });
+	// },
+	// function (session, results){
+		// //var destination = results.response;
+		// session.send("Hi You 2");
 		
-	}
-]);//.triggerAction({matches: 'weather'});
+	// }
+// ]);//.triggerAction({matches: 'weather'});
 
-bot.dialog('orderPizzaDialog', [
-    function (session, args) {
-        if (!args.continueOrder) {
-            session.userData.cart = [];
-            session.send("At anytime you can say 'cancel order', 'view cart', or 'checkout'.")
-        }
-        builder.Prompts.choice(session, "What would you like to add?", "Pizza|Drinks|Extras");
-    },
-    function (session, results) {
-		//builder.Prompts.text(session, 'Hi! What is your name?' + results.response.entity);
-		//session.send("Hi You 2");
-		//console.log(results.response.entity);
-        session.beginDialog('add' + results.response.entity);
-    },
-    function (session, results) {
-        if (results.response) {
-            session.userData.cart.push(results.response);
-        }
-        session.replaceDialog('orderPizzaDialog', { continueOrder: true });
-    }
-]).triggerAction({ 
-        matches: /order.*pizza/i,
-        confirmPrompt: "This will cancel the current order. Are you sure?"
-  })
-  .cancelAction('cancelOrderAction', "Order canceled.", { 
-      matches: /(cancel.*order|^cancel)/i,
-      confirmPrompt: "Are you sure?"
-  })
-  .beginDialogAction('viewCartAction', 'viewCartDialog', { matches: /view.*cart/i })
-  .beginDialogAction('checkoutAction', 'checkoutDialog', { matches: /checkout/i });
-
-// Dialog for showing the users cart
-bot.dialog('viewCartDialog', function (session) {
-    var msg;
-    var cart = session.userData.cart;
-    if (cart.length > 0) {
-        msg = "Items in your cart:";
-        for (var i = 0; i < cart.length; i++) {
-            msg += "\n* " + cart[i];
-        }
-    } else {
-        msg = "Your cart is empty.";
-    }
-    session.endDialog(msg);
-});
-
-// Dialog for checking out
-bot.dialog('checkoutDialog', function (session) {
-    var msg;
-    var cart = session.userData.cart;
-    if (cart.length > 0) {
-        msg = "Your order is on its way.";
-    } else {
-        msg = "Your cart is empty.";
-    }
-    delete session.userData.cart;
-    session.endConversation(msg);
-});
-
-
-bot.dialog('addPizza', [
-    // Step 1
-    function (session) {
-		//session.userData.cart
-        builder.Prompts.text(session, 'Add Pizza');
-    }
-	// ,
-    // // Step 2
+// bot.dialog('orderPizzaDialog', [
+    // function (session, args) {
+        // if (!args.continueOrder) {
+            // session.userData.cart = [];
+            // session.send("At anytime you can say 'cancel order', 'view cart', or 'checkout'.")
+        // }
+        // builder.Prompts.choice(session, "What would you like to add?", "Pizza|Drinks|Extras");
+    // },
     // function (session, results) {
-        // session.endDialog('Hello %s!', results.response);
+		// //builder.Prompts.text(session, 'Hi! What is your name?' + results.response.entity);
+		// //session.send("Hi You 2");
+		// //console.log(results.response.entity);
+        // session.beginDialog('add' + results.response.entity);
+    // },
+    // function (session, results) {
+        // if (results.response) {
+            // session.userData.cart.push(results.response);
+        // }
+        // session.replaceDialog('orderPizzaDialog', { continueOrder: true });
     // }
-]);/*.triggerAction({ 
-        matches: /add.*pizza/i,
-        confirmPrompt: "This will cancel the current order. Are you sure?"
-  });*/
+// ]).triggerAction({ 
+        // matches: /order.*pizza/i,
+        // confirmPrompt: "This will cancel the current order. Are you sure?"
+  // })
+  // .cancelAction('cancelOrderAction', "Order canceled.", { 
+      // matches: /(cancel.*order|^cancel)/i,
+      // confirmPrompt: "Are you sure?"
+  // })
+  // .beginDialogAction('viewCartAction', 'viewCartDialog', { matches: /view.*cart/i })
+  // .beginDialogAction('checkoutAction', 'checkoutDialog', { matches: /checkout/i });
+
+// // Dialog for showing the users cart
+// bot.dialog('viewCartDialog', function (session) {
+    // var msg;
+    // var cart = session.userData.cart;
+    // if (cart.length > 0) {
+        // msg = "Items in your cart:";
+        // for (var i = 0; i < cart.length; i++) {
+            // msg += "\n* " + cart[i];
+        // }
+    // } else {
+        // msg = "Your cart is empty.";
+    // }
+    // session.endDialog(msg);
+// });
+
+// // Dialog for checking out
+// bot.dialog('checkoutDialog', function (session) {
+    // var msg;
+    // var cart = session.userData.cart;
+    // if (cart.length > 0) {
+        // msg = "Your order is on its way.";
+    // } else {
+        // msg = "Your cart is empty.";
+    // }
+    // delete session.userData.cart;
+    // session.endConversation(msg);
+// });
+
+
+// bot.dialog('addPizza', [
+    // // Step 1
+    // function (session) {
+		// //session.userData.cart
+        // builder.Prompts.text(session, 'Add Pizza');
+    // }
+	// // ,
+    // // // Step 2
+    // // function (session, results) {
+        // // session.endDialog('Hello %s!', results.response);
+    // // }
+// ]);/*.triggerAction({ 
+        // matches: /add.*pizza/i,
+        // confirmPrompt: "This will cancel the current order. Are you sure?"
+  // });*/
 
 
 
