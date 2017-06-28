@@ -67,7 +67,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
 })
 .matches('Greeting', (session, args) => {
-	if (!session.userData && !session.userData.greeting) {
+	/*if (!session.userData && !session.userData.greeting) {
 		session.send("Hello. What is your name?");
 		session.userData.greeting = true;
 	} else if (!session.userData && !session.userData.name) {
@@ -76,7 +76,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 		session.send("Hello, " + name + ". What is your Email ID?");
 	} else {
 		session.userData = null;
-	}
+	}*/
     session.send('Hi you');
 		var jsonBody =  '{"documents": [{"language": "en","id": "1","text": "' + session.message.text + '"}]}'
 		 request.post({
@@ -91,6 +91,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 			 function (error, response, body) {
 			 session.send(JSON.stringify(body));
 			 session.send(JSON.stringify(error));
+			 session.send(JSON.stringify(response));
 		 });
     
 })
