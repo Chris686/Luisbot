@@ -133,9 +133,14 @@ function getUserName(session, args, next){
 	session.dialogData.entities = args.entities;
 	var username = builder.EntityRecognizer.findEntity(args.entities, 'username');
 	if(username){
-		session.send("hi " + ", How are you!");
-		next();
-	}else{
+		session.send("hi " + username + ", How are you1");
+		next({response: username.entity });
+	}
+	else if( session.dialogData.username){
+		session.send("hi " + session.dialogData.username + ", How are you2");
+		next({ response: session.dialogData.username });
+	}
+	else{
 		builder.Prompts.text(session, "What is your username?");
 	}
 }
