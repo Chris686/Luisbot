@@ -129,7 +129,7 @@ function thankYou(sessions, args, next){
 	session.send("Thank you");
 }
 
-function getUserName(session, args next){
+function getUserName(session, args, next){
 	session.dialogData.entities = args.entities;
 	var username = builder.EntityRecognuzer.findEntity(args.entities, 'username');
 	if(username){
