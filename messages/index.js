@@ -129,6 +129,16 @@ function thankYou(sessions, args, next){
 	session.send("Thank you");
 }
 
+function getUserName(session, args next){
+	session.dialogData.entities = args.entities;
+	var username = builder.EntityRecognuzer.findEntity(args.entities, 'username');
+	if(username){
+		session.send("hi " + ", How are you!");
+		next();
+	}else{
+		builder.Prompts.text(session, "What is your username?");
+	}
+}
 
 if (useEmulator) {
     
