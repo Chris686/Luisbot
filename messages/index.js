@@ -76,11 +76,13 @@ bot.dialog('addPizza', [
     // function (session, results) {
         // session.endDialog('Hello %s!', results.response);
     // }
+	//next();
 ]);
 
 function addPizza(session, args, next){
 	session.dialogData.entities = args.entities;
 	builder.Prompts.text(session, 'Add Pizza' + JSON.stringify(args.entities));
+	next();
 }
 
 function checkSentiment(session, args, next){
