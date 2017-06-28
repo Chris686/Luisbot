@@ -68,16 +68,15 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 })
 .matches('Greeting', (session, args) => {
 	if (!session.userData.greeting) {
-        session.send("Hello. What is your name?");
-        session.userData.greeting = true;
-    } else if (!session.userData.name) {
-        getName(session);
-    } else if (!session.userData.email) {
-        getEmail(session);
-    } else {
-        session.userData = null;
-    }
-
+		session.send("Hello. What is your name?");
+		session.userData.greeting = true;
+	} else if (!session.userData.name) {
+		name = session.message.text;
+		session.userData.name = name;
+		session.send("Hello, " + name + ". What is your Email ID?");
+	} else {
+		session.userData = null;
+	}
     session.send('Hi you');
 		var jsonBody =  '{"documents": [{"language": "en","id": "1","text": "' + session.message.text + '"}]}'
 		 request.post({
@@ -126,19 +125,17 @@ if (useEmulator) {
     module.exports = { default: connector.listen() }
 }
 
-function getName(session) {
-    name = session.message.text;
-    session.userData.name = name;
-    session.send("Hello, " + name + ". What is your Email ID?");
-}
+// function getName(session) {
+   
+// }
 
-function getEmail(session) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    email = session.message.text;
-    if (re.test(email)) {
-        session.userData.email = email;
-        session.send("Thank you, " + session.userData.name + ". Please set a new password.");
-    } else {
-        session.send("Please type a valid email address. For example: test@hotmail.com");
-    }
-}
+// function getEmail(session) {
+    // var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // email = session.message.text;
+    // if (re.test(email)) {
+        // session.userData.email = email;
+        // session.send("Thank you, " + session.userData.name + ". Please set a new password.");
+    // } else {
+        // session.send("Please type a valid email address. For example: test@hotmail.com");
+    // }
+// }
