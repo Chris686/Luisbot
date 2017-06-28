@@ -88,9 +88,9 @@ bot.dialog('addPizza', [
     // }
 ]);
 
-function addPizza(session, args, netxt){
+function addPizza(session, args, next){
 	session.dialogData.entities = args.entities;
-	builder.Prompts.text(session, 'Add Pizza' + args.entities);
+	builder.Prompts.text(session, 'Add Pizza' + JSON.stringify(args.entities));
 }
 
 
