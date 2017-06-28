@@ -89,7 +89,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 			 body: jsonBody
 		 },
 			 function (error, response, body) {
-			 session.send(JSON.stringify(body));
+			 session.send(JSON.stringify(body)
+			 session.send(JSON.stringify(error));
 		 });
     
 })
