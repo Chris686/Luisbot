@@ -67,7 +67,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
 })
 .matches('Greeting', [
-		addPizza
+		checkSentiment, addPizza
 	])
 .onDefault((session) => {
 	session.send('Sorry, I did not understand \'%s\'.', session.message.text);
@@ -91,6 +91,24 @@ bot.dialog('addPizza', [
 function addPizza(session, args, next){
 	session.dialogData.entities = args.entities;
 	builder.Prompts.text(session, 'Add Pizza' + JSON.stringify(args.entities));
+}
+
+function checkSentiment(session, args, next){
+	var jsonBody =  '{"documents": [{"language": "en","id": "1","text": "' + session.message.text + '"}]}'
+		 request.post({
+			 headers: {
+				 'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
+				 'Content-Type': 'application/json',
+				 'Accept': 'application/json'
+			 },
+			 url: 'https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment',
+			 body: jsonBody
+		 },
+			 function (error, response, body) {
+			 session.send(JSON.stringify(body));
+			 // session.send(JSON.stringify(error));
+			 // session.send(JSON.stringify(response));
+		 });
 }
 
 
