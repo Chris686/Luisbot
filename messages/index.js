@@ -77,7 +77,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 	} else {
 		session.userData = null;
 	}*/
-    session.send('Hi you');
+    /*session.send('Hi you');
 		var jsonBody =  '{"documents": [{"language": "en","id": "1","text": "' + session.message.text + '"}]}'
 		 request.post({
 			 headers: {
@@ -93,7 +93,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 			 // session.send(JSON.stringify(error));
 			 // session.send(JSON.stringify(response));
 		 });
-    
+    */
+	addPizza
 })
 .onDefault((session) => {
     session.send('Sorry, I did not understand \'%s\'.', session.message.text);
@@ -113,6 +114,11 @@ bot.dialog('/', intents);
         // session.endDialog('Hello %s!', results.response);
     // }
 ]);
+
+function addPizza(session, args, netxt){
+	session.dialogData.entities = args.entities;
+	builder.Prompts.text(session, 'Add Pizza' + args.entities);
+}
 
 
 
