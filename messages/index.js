@@ -67,10 +67,10 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
 })
 .matches('Greeting', (session, args) => {
-	if (!session.userData.greeting) {
+	if (!session.userData && !session.userData.greeting) {
 		session.send("Hello. What is your name?");
 		session.userData.greeting = true;
-	} else if (!session.userData.name) {
+	} else if (!session.userData && !session.userData.name) {
 		name = session.message.text;
 		session.userData.name = name;
 		session.send("Hello, " + name + ". What is your Email ID?");
