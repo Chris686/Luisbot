@@ -63,11 +63,11 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 			return console.dir(err);
 		session.send(JSON.stringify(weather));
 	});
-	session.beginDialog("addPizza");
+	//session.beginDialog("addPizza");
 
 })
 .matches('Greeting', [
-		checkSentiment, addPizza
+		addPizza, checkSentiment
 	])
 .onDefault((session) => {
 	session.send('Sorry, I did not understand \'%s\'.', session.message.text);
