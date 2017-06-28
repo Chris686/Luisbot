@@ -57,7 +57,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 		getWeather, thankYou
 ])
 .matches('Greeting', [
-		addPizza, checkSentiment, thankYou
+		getUserName, checkSentiment, thankYou
 	])
 .onDefault((session) => {
 	session.send('Sorry, I did not understand \'%s\'.', session.message.text);
