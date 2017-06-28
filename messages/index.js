@@ -63,6 +63,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
    		return console.dir(err);
    	session.send(JSON.stringify(weather));
    });
+   session.beginDialog("addPizza");
 
 })
 .matches('Greeting', (session, args) => {
@@ -88,7 +89,18 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
 bot.dialog('/', intents);    
 
-
+ bot.dialog('addPizza', [
+    // Step 1
+    function (session) {
+		//session.userData.cart
+        builder.Prompts.text(session, 'Add Pizza');
+    }
+	// ,
+    // // Step 2
+    // function (session, results) {
+        // session.endDialog('Hello %s!', results.response);
+    // }
+]);
 
 
 
