@@ -15,16 +15,16 @@ var path = require('path');
   });*/
 var request = require('request');
 var Forecast = require("forecast");
-   var forecast = new Forecast({
-   		service: 'darksky',
-   		key: '48b5aa78fb42669745ca06ae428c56cc',
-   		units: 'celcius',
-   		cache: true, // Cache API requests
-   		ttl: { // How long to cache requests. Uses syntax from moment.js: http://momentjs.com/docs/#/durations/creating/
-   			minutes: 27,
-   			seconds: 45
-   		}
-   	});
+   // var forecast = new Forecast({
+   		// service: 'darksky',
+   		// key: '48b5aa78fb42669745ca06ae428c56cc',
+   		// units: 'celcius',
+   		// cache: true, // Cache API requests
+   		// ttl: { // How long to cache requests. Uses syntax from moment.js: http://momentjs.com/docs/#/durations/creating/
+   			// minutes: 27,
+   			// seconds: 45
+   		// }
+   	// });
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
@@ -54,10 +54,10 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     
 })
 .matches('weather', [
-		getWeather
+		getWeather, thankYou
 ])
 .matches('Greeting', [
-		addPizza, checkSentiment
+		addPizza, checkSentiment, thankYou
 	])
 .onDefault((session) => {
 	session.send('Sorry, I did not understand \'%s\'.', session.message.text);
@@ -121,6 +121,10 @@ function getWeather(session, args, next){
 			return console.dir(err);
 		session.send(JSON.stringify(weather));
 	});
+}
+
+function thankYou(sessions, args, next){
+	session.send("Thank you");
 }
 
 
