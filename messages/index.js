@@ -49,7 +49,7 @@ const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v1/application?id=' +
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 .matches('Greeting', (session, args) => {
-	session.beginDialog('dialogweather');
+	session.beginDialog('dialogGreeting');
 })
 .matches('weather', (session, args) => {
 	session.beginDialog('dialogweather');
