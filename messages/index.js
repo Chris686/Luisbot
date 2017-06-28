@@ -54,29 +54,29 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     
 })
 .matches('weather', (session, args) => {
-    session.send('you asked for weather' + JSON.stringify(args));
-   // Initialize
+	session.send('you asked for weather' + JSON.stringify(args));
+	// Initialize
 
-   // Retrieve weather information from coordinates (Sydney, Australia)
-   forecast.get([-33.8683, 151.2086], function (err, weather) {
-   	if (err)
-   		return console.dir(err);
-   	session.send(JSON.stringify(weather));
-   });
-   session.beginDialog("addPizza");
+	// Retrieve weather information from coordinates (Sydney, Australia)
+	forecast.get([-33.8683, 151.2086], function (err, weather) {
+		if (err)
+			return console.dir(err);
+		session.send(JSON.stringify(weather));
+	});
+	session.beginDialog("addPizza");
 
 })
-.matches('Greeting', (session, args) => {
-	addPizza
-})
+.matches('Greeting', [
+		addPizza
+	])
 .onDefault((session) => {
-    session.send('Sorry, I did not understand \'%s\'.', session.message.text);
+	session.send('Sorry, I did not understand \'%s\'.', session.message.text);
 });
 
-bot.dialog('/', intents);    
+bot.dialog('/', intents);
 
- bot.dialog('addPizza', [
-    // Step 1
+bot.dialog('addPizza', [
+		// Step 1
     function (session) {
 		//session.userData.cart
         builder.Prompts.text(session, 'Add Pizza');
