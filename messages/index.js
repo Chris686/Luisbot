@@ -57,7 +57,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 		getWeather, thankYou
 ])
 .matches('Greeting', [
-		checkSentiment, getUserName, setUserName
+		checkLanguage, checkSentiment, getUserName, setUserName
 	])
 .onDefault((session) => {
 	session.send('Sorry, I did not understand \'%s\'.', session.message.text);
@@ -85,40 +85,45 @@ function addPizza(session, args, next){
 	next();
 }
 
-function checkSentiment(session, args, next){
-	var jsonBody =  '{"documents": [{"language": "en","id": "1","text": "' + session.message.text + '"}]}'
-		 request.post({
-			 headers: {
-				 'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
-				 'Content-Type': 'application/json',
-				 'Accept': 'application/json'
-			 },
-			 url: 'https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment',
-			 body: jsonBody
-		 },
-			 function (error, response, body) {
-			 session.send(JSON.stringify(body));
-			 //console.log(body);
-			 var answer = JSON.parse(body);
-			 session.send(JSON.stringify(answer.documents[0]));
-			 if(answer.documents[0].score >= 0.5){
+function checkLanguage() {
+	var jsonBody = '{"documents": [{"language": "en","id": "1","text": "' + session.message.text + '"}]}'
+		request.post({
+			headers: {
+				'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
+				'Content-Type': 'application/json',
+				'Accept': 'application/json'
+			},
+			url: 'https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/languages',
+			body: jsonBody
+		},
+			function (error, response, body) {
+			session.send(JSON.stringify(body));
+			next();
+		});
+}
+
+function checkSentiment(session, args, next) {
+	var jsonBody = '{"documents": [{"language": "en","id": "1","text": "' + session.message.text + '"}]}'
+		request.post({
+			headers: {
+				'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
+				'Content-Type': 'application/json',
+				'Accept': 'application/json'
+			},
+			url: 'https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment',
+			body: jsonBody
+		},
+			function (error, response, body) {
+			session.send(JSON.stringify(body));
+			//console.log(body);
+			var answer = JSON.parse(body);
+			session.send(JSON.stringify(answer.documents[0]));
+			if (answer.documents[0].score >= 0.5) {
 				next();
-			 }
-			 else{
-				 session.endDialog("Hi, so you are not in the mood maybe we talk later");
-			 }
-			 //session.send("test");
-			 //session.send(answer);
-			 //session.send(answer.documents[0].score);//[0].score);
-			 /*if (body.documents[0].score >= 0.5) {
-			 	next();
-			 } else {
-			 	sessionendDialog("Maybe we should talk later");
-			 }*/
-		 
-			 // session.send(JSON.stringify(error));
-			 // session.send(JSON.stringify(response));
-		 });
+			} else {
+				session.endDialog("Hi, so you are not in the mood maybe we talk later");
+			}
+		});
 }
 
 function getWeather(session, args, next){
