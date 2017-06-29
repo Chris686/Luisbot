@@ -54,7 +54,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     
 })
 .matches('weather', [
-		getWeather, thankYou
+		getCoordinates, getWeather
 ])
 .matches('Greeting', [
 		checkLanguage, checkSentiment, getUserName, setUserName
@@ -187,6 +187,14 @@ function setUserName(session, args, next){
 		session.endDialog("Hi " + session.dialogData.username + ", How are you?");
 		//next();
 	}
+}
+
+function getCoordinates(session, args, next) {
+	request.get('http://dev.virtualearth.net/REST/v1/Locations/hamburg?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV')
+	.on('response', function (response) {
+		session.send(JSON.stringify(response));
+		next();
+	});
 }
 
 if (useEmulator) {
