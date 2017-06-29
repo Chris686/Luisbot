@@ -98,9 +98,9 @@ function checkSentiment(session, args, next){
 		 },
 			 function (error, response, body) {
 			 session.send(JSON.stringify(body));
-			 console.log(body);
+			 //console.log(body);
 			 var answer = JSON.parse(body);
-			 console.log(answer);
+			 session.send(JSON.stringify(answer.documents[0]));
 			 next();
 			 //session.send("test");
 			 //session.send(answer);
