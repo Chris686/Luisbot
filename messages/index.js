@@ -200,8 +200,8 @@ function getCoordinates(session, args, next) {
 		//session.send(JSON.stringify(body));
 		var jsonBody = JSON.parse(body);
 		var choices ="";
-		for(var attributename in jsonBody.resourceSets[0].resources){
-			choices += attributename.name;
+		for(var i in jsonBody.resourceSets[0].resources){
+			choices += jsonBody.resourceSets[0].resources[i].name;
 			choices += "|";
 		}
 		builder.Prompts.choice(session, 'Which Loaction do you mean', choices);
