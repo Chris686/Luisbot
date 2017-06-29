@@ -107,10 +107,10 @@ function checkLanguage(session, args, next) {
 function checkSentiment(session, args, next) {
 	//session.send(args.response);
 	var langua = args.response;
-	var supLang = [ "da","de","el","en","es","fi","fr","ja","it","nl","no","pl","pt","ru","sv","tr"];
-	if(supLang.indexOf(langua)==-1){
+	var supLang = ["da", "de", "el", "en", "es", "fi", "fr", "ja", "it", "nl", "no", "pl", "pt", "ru", "sv", "tr"];
+	if (supLang.indexOf(langua) == -1) {
 		session.send("The requested Language is not supported we will try it in english");
-		luangua="en";
+		langua = "en";
 	}
 	var jsonBody = '{"documents": [{"language": "' + langua + '","id": "1","text": "' + session.message.text + '"}]}'
 		request.post({
@@ -199,18 +199,3 @@ if (useEmulator) {
 } else {
     module.exports = { default: connector.listen() }
 }
-
-// function getName(session) {
-   
-// }
-
-// function getEmail(session) {
-    // var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // email = session.message.text;
-    // if (re.test(email)) {
-        // session.userData.email = email;
-        // session.send("Thank you, " + session.userData.name + ". Please set a new password.");
-    // } else {
-        // session.send("Please type a valid email address. For example: test@hotmail.com");
-    // }
-// }
