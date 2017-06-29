@@ -107,7 +107,12 @@ function checkLanguage(session, args, next) {
 function checkSentiment(session, args, next) {
 	//session.send(args.response);
 	var langua = args.response;
-	var jsonBody = '{"documents": [{"language": "' + langua.toString() + '","id": "1","text": "' + session.message.text + '"}]}'
+	var supLang = [ "da","de","el","en","es","fi","fr","ja","it","nl","no","pl","pt","ru","sv","tr"];
+	if(supLang.indexOf(langua)==-1){
+		session.send("The requested Language is not supported we will try it in english");
+		luangua="en";
+	}
+	var jsonBody = '{"documents": [{"language": "' + langua + '","id": "1","text": "' + session.message.text + '"}]}'
 		request.post({
 			headers: {
 				'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
