@@ -99,10 +99,10 @@ function checkSentiment(session, args, next){
 			 function (error, response, body) {
 			 session.send(JSON.stringify(body));
 			 var answer = JSON.parse(body);
-			 session.send("test");
-			 session.send(answer);
-			 session.send(answer.documents[0].score);//[0].score);
 			 next();
+			 //session.send("test");
+			 //session.send(answer);
+			 //session.send(answer.documents[0].score);//[0].score);
 			 /*if (body.documents[0].score >= 0.5) {
 			 	next();
 			 } else {
