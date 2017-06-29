@@ -205,7 +205,7 @@ function getCoordinates(session, args, next) {
 			choices += "|";
 		}
 		builder.Prompts.choice(session, 'Which Loaction do you mean', choices);
-		session.send(jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "____" + jsonBody.resourceSets[0].resources[0].point.coordinates[1]);
+		session.send(jsonBody.resourceSets[0].resources[0].name + "____" + jsonBody.resourceSets[0].resources[0].point.coordinates[1]);
 		//next();
 	})
 	// request.get('http://dev.virtualearth.net/REST/v1/Locations/hamburg?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV')
