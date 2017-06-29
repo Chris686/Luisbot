@@ -146,7 +146,7 @@ function getUserName(session, args, next){
 }
 
 function setUserName(session, args, next){
-	var userName = result.response;
+	var userName = args.response;
 	if(!userName){
 		session.send("Hi, so you do not want to tell me your name");
 	}else{
