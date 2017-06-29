@@ -101,7 +101,12 @@ function checkSentiment(session, args, next){
 			 //console.log(body);
 			 var answer = JSON.parse(body);
 			 session.send(JSON.stringify(answer.documents[0]));
-			 next();
+			 if(answer.documents[0].score >= 0.5){
+				next();
+			 }
+			 else{
+				 session.endDialog("Hi, so you are not in the mood maybe we talk later");
+			 }
 			 //session.send("test");
 			 //session.send(answer);
 			 //session.send(answer.documents[0].score);//[0].score);
