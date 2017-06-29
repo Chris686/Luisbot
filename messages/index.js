@@ -194,7 +194,8 @@ function getCoordinates(session, args, next) {
 	.on('response', function (error, response, body) {
 		//var resultSet = JSON.parse(response);
 		//resultSet.resourceSets[0].resources[0].point.coordinates[0]
-		session.send(body.resourceSets[0].resources[0].point.coordinates[0] + "____" + body.resourceSets[0].resources[0].point.coordinates[1]);
+		session.send(body);
+		//session.send(body.resourceSets[0].resources[0].point.coordinates[0] + "____" + body.resourceSets[0].resources[0].point.coordinates[1]);
 		//JSON.stringify(response));
 		next();
 	});
