@@ -97,8 +97,10 @@ function checkLanguage(session, args, next) {
 			body: jsonBody
 		},
 			function (error, response, body) {
-			session.send(JSON.stringify(body));
-			next();
+			var answer = JSON.parse(body);
+			var langu = answer.documents[0].detectedLanguages[0].iso6391Name;
+			session.send(langu);
+			next({ response: langu});
 		});
 }
 
