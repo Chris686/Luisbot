@@ -190,15 +190,25 @@ function setUserName(session, args, next){
 }
 
 function getCoordinates(session, args, next) {
-	request.get('http://dev.virtualearth.net/REST/v1/Locations/hamburg?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV')
-	.on('response', function (error, response, body) {
-		//var resultSet = JSON.parse(response);
-		//resultSet.resourceSets[0].resources[0].point.coordinates[0]
+	var options = {
+		url: 'http://dev.virtualearth.net/REST/v1/Locations/hamburg?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV',
+		method: 'GET'}
+	request(options, function (error, response, body) {
+		 if(error){
+			 session.send(error);
+		 }
 		session.send(JSON.stringify(body));
-		//session.send(body.resourceSets[0].resources[0].point.coordinates[0] + "____" + body.resourceSets[0].resources[0].point.coordinates[1]);
-		//JSON.stringify(response));
 		next();
-	});
+	})
+	// request.get('http://dev.virtualearth.net/REST/v1/Locations/hamburg?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV')
+	// .on('response', function (error, response, body) {
+		// //var resultSet = JSON.parse(response);
+		// //resultSet.resourceSets[0].resources[0].point.coordinates[0]
+		// session.send(JSON.stringify(body));
+		// //session.send(body.resourceSets[0].resources[0].point.coordinates[0] + "____" + body.resourceSets[0].resources[0].point.coordinates[1]);
+		// //JSON.stringify(response));
+		// next();
+	// });
 }
 
 if (useEmulator) {
