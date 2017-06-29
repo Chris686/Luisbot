@@ -199,7 +199,7 @@ function getCoordinates(session, args, next) {
 		 }
 		//session.send(JSON.stringify(body));
 		var jsonBody = JSON.parse(body);
-		builder.Prompts.choice(session, 'Which Loaction do you mean', jsonBody.resourceSets[0].resources);
+		builder.Prompts.choice(session, 'Which Loaction do you mean', "Washington1|Washington2|Washington3|Washington4");
 		session.send(jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "____" + jsonBody.resourceSets[0].resources[0].point.coordinates[1]);
 		//next();
 	})
