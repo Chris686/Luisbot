@@ -85,8 +85,8 @@ function addPizza(session, args, next){
 	next();
 }
 
-function checkLanguage() {
-	var jsonBody = '{"documents": [{"language": "en","id": "1","text": "' + session.message.text + '"}]}'
+function checkLanguage(session, args, next) {
+	var jsonBody = '{"documents": [{"id": "1","text": "' + session.message.text + '"}]}'
 		request.post({
 			headers: {
 				'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
