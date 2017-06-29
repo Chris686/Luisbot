@@ -57,7 +57,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 		getWeather, thankYou
 ])
 .matches('Greeting', [
-		getUserName, checkSentiment, thankYou
+		getUserName, setUserName , checkSentiment, thankYou
 	])
 .onDefault((session) => {
 	session.send('Sorry, I did not understand \'%s\'.', session.message.text);
@@ -145,13 +145,13 @@ function getUserName(session, args, next){
 	}
 }
 
-function setUsername(session, args, next){
+function setUserName(session, args, next){
 	var userName = result.response;
 	if(!userName){
-		session.endDialog("Hi, so you do not want to tell me your name");
+		session.send("Hi, so you do not want to tell me your name");
 	}else{
 		session.dialogData.username = userName;
-		session.endDialog("Hi " + session.dialogData.username + ", How are you?");
+		session.send("Hi " + session.dialogData.username + ", How are you?");
 	}
 }
 
