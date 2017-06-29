@@ -198,6 +198,7 @@ function getCoordinates(session, args, next) {
 			 session.send(error);
 		 }
 		session.send(JSON.stringify(body));
+		session.send(body.resourceSets[0].resources[0].point.coordinates[0] + "____" + body.resourceSets[0].resources[0].point.coordinates[1]);
 		next();
 	})
 	// request.get('http://dev.virtualearth.net/REST/v1/Locations/hamburg?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV')
@@ -205,7 +206,6 @@ function getCoordinates(session, args, next) {
 		// //var resultSet = JSON.parse(response);
 		// //resultSet.resourceSets[0].resources[0].point.coordinates[0]
 		// session.send(JSON.stringify(body));
-		// //session.send(body.resourceSets[0].resources[0].point.coordinates[0] + "____" + body.resourceSets[0].resources[0].point.coordinates[1]);
 		// //JSON.stringify(response));
 		// next();
 	// });
