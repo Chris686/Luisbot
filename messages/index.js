@@ -133,15 +133,25 @@ function getUserName(session, args, next){
 	session.dialogData.entities = args.entities;
 	var username = builder.EntityRecognizer.findEntity(args.entities, 'username');
 	if(username){
-		session.send("hi " + username + ", How are you1");
+		session.send("Hi " + username + ", How are you1");
 		next({response: username.entity });
 	}
 	else if( session.dialogData.username){
-		session.send("hi " + session.dialogData.username + ", How are you2");
+		session.send("Hi " + session.dialogData.username + ", How are you2");
 		next({ response: session.dialogData.username });
 	}
 	else{
 		builder.Prompts.text(session, "What is your username?");
+	}
+}
+
+function setUsername(session, args, next){
+	var userName = result.response;
+	if(!userName){
+		session.endDialog("Hi, so you do not want to tell me your name");
+	}else{
+		session.dialogData.username = userName;
+		session.endDialog("Hi " + session.dialogData.username + ", How are you?");
 	}
 }
 
