@@ -107,7 +107,7 @@ function checkLanguage(session, args, next) {
 function checkSentiment(session, args, next) {
 	//session.send(args.response);
 	var langua = args.response;
-	var jsonBody = '{"documents": [{"language": "' + langua + '","id": "1","text": "' + session.message.text + '"}]}'
+	var jsonBody = '{"documents": [{"language": "' + langua.toString() + '","id": "1","text": "' + session.message.text + '"}]}'
 		request.post({
 			headers: {
 				'Ocp-Apim-Subscription-Key': '74f79220e9af438ca623d96758a4c36c',
