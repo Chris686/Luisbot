@@ -229,7 +229,8 @@ function getCoordinates(session, args, next) {
 }
 
 function getLocation(session, args, next) {
-    var luisStack = JSON.parse(args);
+    session.send(JSON.stringify(args));
+    //var luisStack = JSON.parse(args);
     if (args.entities[0].type.startsWith("builtin.geography")) {
         next({ response: args.entities[0].entity });
     } else {
