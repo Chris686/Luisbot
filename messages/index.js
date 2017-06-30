@@ -180,9 +180,9 @@ function getUserName(session, args, next) {
     if (username) {
         session.send("Hi " + username + ", How are you1");
         next({ response: username.entity });
-    } else if (session.dialogData.username) {
-        session.send("Hi " + session.dialogData.username + ", How are you2");
-        next({ response: session.dialogData.username });
+    } else if (session.userData.username) {
+        session.send("Hi " + session.userData.username + ", How are you2");
+        next({ response: session.userData.username });
     } else {
         builder.Prompts.text(session, "What is your username?");
     }
@@ -194,9 +194,9 @@ function setUserName(session, args, next) {
         session.endDialog("Hi, so you do not want to tell me your name");
         //next();
     } else {
-        session.dialogData.username = userName;
+        session.userData.username = userName;
         session.save();
-        session.endDialog("Hi " + session.dialogData.username + ", How are you?");
+        session.endDialog("Hi " + session.userData.username + ", How are you?");
         //next();
     }
 }
