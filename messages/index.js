@@ -141,9 +141,9 @@ function getWeather(session, args, next) {
     //session.send(session.userData.locations[args.response.entity]);
     var coords = session.userData.locations[args.response.entity];
 
-    session.send(JSON.stringify(coords) + "__" + coords.Longitude);
-    var coords = JSON.parse(session.userData.locations[args.response.entity]);
 
+    var coords = JSON.parse(session.userData.locations[args.response.entity]);
+    session.send(JSON.stringify(coords) + "__" + coords.Longitude);
     // Initialize
     var forecast = new Forecast({
         service: 'darksky',
