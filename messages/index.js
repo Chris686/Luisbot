@@ -137,6 +137,7 @@ function checkSentiment(session, args, next) {
 
 function getWeather(session, args, next){
 	session.send(args.response.entity + '___' + JSON.stringify(args.response.entity));
+	session.send(userData.locations);
 	// Initialize
 	var forecast = new Forecast({
    		service: 'darksky',
@@ -184,6 +185,7 @@ function setUserName(session, args, next){
 		//next();
 	}else{
 		session.dialogData.username = userName;
+		session.save();
 		session.endDialog("Hi " + session.dialogData.username + ", How are you?");
 		//next();
 	}
@@ -205,6 +207,8 @@ function getCoordinates(session, args, next) {
 		for (var i in jsonBody.resourceSets[0].resources) {
 			map[jsonBody.resourceSets[0].resources[i].name] = "{Latitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + ",Longitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "}";
 		}
+		session.userData.locations = map;
+		session.save();
 		if(Object.keys(map).length <= 0){
 			session.endDialog("This is no valid location, please try again");
 		}
