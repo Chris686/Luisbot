@@ -218,9 +218,9 @@ function getCoordinates(session, args, next) {
         }
 
         if (Object.keys(map).length > 1) {
-            builder.Prompts.choice(session, 'Which Loaction do you mean', JSON.stringify(map));
+            builder.Prompts.choice(session, 'Which Loaction do you mean', map);
         } else {
-            session.send("single Location___" + map);
+            session.send("single Location___" + JSON.stringify(map));
             next({ response: map });
         }
         //session.send(map + "___" + JSON.stringify(map));
