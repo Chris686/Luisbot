@@ -136,7 +136,7 @@ function checkSentiment(session, args, next) {
 }
 
 function getWeather(session, args, next) {
-    session.send(args.response.entity + '___' + JSON.stringify(args.response));
+    //session.send(args.response.entity + '___' + JSON.stringify(args.response));
     //session.send(JSON.stringify(session.userData.locations[args.response.entity]));
     //session.send(session.userData.locations[args.response.entity]);
     //var coords = session.userData.locations[args.response.entity];
@@ -166,7 +166,7 @@ function getWeather(session, args, next) {
         if (err)
             return console.dir(err);
         var username = session.userData.username;
-        session.send(JSON.stringify("The Weather has the following parameters:" + username + JSON.stringify(weather.currently, null, '\t')));
+        session.send(JSON.stringify("The Weather has the following parameters:" + username + JSON.stringify(weather.currently, null, 4)));
     });
 }
 
@@ -202,7 +202,7 @@ function setUserName(session, args, next) {
 }
 
 function getCoordinates(session, args, next) {
-    session.send("Searching for Coordinates to get weather " + JSON.stringify(args));
+    session.send("Searching for Coordinates to get weather");
     var options = {
         url: 'http://dev.virtualearth.net/REST/v1/Locations/' + args.response + '?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV',
         method: 'GET'
