@@ -207,7 +207,7 @@ function getCoordinates(session, args, next) {
         var choices = "";
         var map = new Object();
         for (var i in jsonBody.resourceSets[0].resources) {
-            map[jsonBody.resourceSets[0].resources[i].name] = "{Latitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + ",Longitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "}";
+            map[jsonBody.resourceSets[0].resources[i].name] = '{"Latitude:"' + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + ',"Longitude:"' + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "}";
         }
         session.userData.locations = map;
         session.save();
