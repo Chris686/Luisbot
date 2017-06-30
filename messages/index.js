@@ -202,12 +202,12 @@ function getCoordinates(session, args, next) {
 		var choices ="";
 		var map = new Object();
 		for(var i in jsonBody.resourceSets[0].resources){
-			map[jsonBody.resourceSets[0].resources[i].name] = jsonBody.resourceSets[0].resources[0].point.coordinates;
-			choices += jsonBody.resourceSets[0].resources[i].name;
-			choices += "|";
+			map[jsonBody.resourceSets[0].resources[i].name] = "{Latitude:"+jsonBody.resourceSets[0].resources[0].point.coordinates[0]+",Longitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "}";
+			//choices += jsonBody.resourceSets[0].resources[i].name;
+			//choices += "|";
 		}
 		session.send(map + "___" + JSON.stringify(map));
-		builder.Prompts.choice(session, 'Which Loaction do you mean', choices);
+		builder.Prompts.choice(session, 'Which Loaction do you mean', map);
 		session.send(jsonBody.resourceSets[0].resources[0].name + "____" + jsonBody.resourceSets[0].resources[0].point.coordinates[1]);
 		//next();
 	})
