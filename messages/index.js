@@ -198,7 +198,7 @@ function setUserName(session, args, next) {
 function getCoordinates(session, args, next) {
     session.send(JSON.stringify(args));
     var options = {
-        url: 'http://dev.virtualearth.net/REST/v1/Locations/Washington?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV',
+        url: 'http://dev.virtualearth.net/REST/v1/Locations/' + args.response + '?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV',
         method: 'GET'
     }
     request(options, function(error, response, body) {
