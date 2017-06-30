@@ -205,7 +205,7 @@ function getCoordinates(session, args, next) {
 		for (var i in jsonBody.resourceSets[0].resources) {
 			map[jsonBody.resourceSets[0].resources[i].name] = "{Latitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + ",Longitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "}";
 		}
-		if(Object..keys(map).length <= 0){
+		if(Object.keys(map).length <= 0){
 			session.endDialog("This is no valid location, please try again");
 		}
 		
