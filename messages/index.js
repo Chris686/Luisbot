@@ -200,10 +200,13 @@ function getCoordinates(session, args, next) {
 		//session.send(JSON.stringify(body));
 		var jsonBody = JSON.parse(body);
 		var choices ="";
+		var map = new Object();
 		for(var i in jsonBody.resourceSets[0].resources){
+			map[jsonBody.resourceSets[0].resources[i].name] = jsonBody.resourceSets[0].resources[0].point.coordinates;
 			choices += jsonBody.resourceSets[0].resources[i].name;
 			choices += "|";
 		}
+		session.send(map + "___" + JSON.stringify(map));
 		builder.Prompts.choice(session, 'Which Loaction do you mean', choices);
 		session.send(jsonBody.resourceSets[0].resources[0].name + "____" + jsonBody.resourceSets[0].resources[0].point.coordinates[1]);
 		//next();
