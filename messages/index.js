@@ -53,9 +53,9 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.send('Hi, none Intent \'%s\'.', session.message.text);
     
 })
-.matches('weather', (session, args) => { [
+.matches('weather', [
 		getCoordinates, getWeather
-]})
+])
 .matches('Greeting', [
 		checkLanguage, checkSentiment, getUserName, setUserName
 	])
@@ -190,6 +190,7 @@ function setUserName(session, args, next){
 }
 
 function getCoordinates(session, args, next) {
+	session.send(JSON.stringify(args));
 	var options = {
 		url: 'http://dev.virtualearth.net/REST/v1/Locations/Washington?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV',
 		method: 'GET'
