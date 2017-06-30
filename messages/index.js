@@ -192,33 +192,27 @@ function setUserName(session, args, next){
 function getCoordinates(session, args, next) {
 	var options = {
 		url: 'http://dev.virtualearth.net/REST/v1/Locations/Washington?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV',
-		method: 'GET'}
+		method: 'GET'
+	}
 	request(options, function (error, response, body) {
-		 if(error){
-			 session.send(error);
-		 }
-		//session.send(JSON.stringify(body));
-		var jsonBody = JSON.parse(body);
-		var choices ="";
-		var map = new Object();
-		for(var i in jsonBody.resourceSets[0].resources){
-			map[jsonBody.resourceSets[0].resources[i].name] = "{Latitude:"+jsonBody.resourceSets[0].resources[0].point.coordinates[0]+",Longitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "}";
-			//choices += jsonBody.resourceSets[0].resources[i].name;
-			//choices += "|";
+		if (error) {
+			session.send(error);
 		}
-		session.send(map + "___" + JSON.stringify(map));
-		builder.Prompts.choice(session, 'Which Loaction do you mean', map);
-		session.send(jsonBody.resourceSets[0].resources[0].name + "____" + jsonBody.resourceSets[0].resources[0].point.coordinates[1]);
+		var jsonBody = JSON.parse(body);
+		var choices = "";
+		var map = new Object();
+		for (var i in jsonBody.resourceSets[0].resources) {
+			map[jsonBody.resourceSets[0].resources[i].name] = "{Latitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + ",Longitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "}";
+		}
+		if (Object.keys(map).length > 1) {
+			builder.Prompts.choice(session, 'Which Loaction do you mean', map);
+		} else {
+			next({ response: map});
+		}
+		//session.send(map + "___" + JSON.stringify(map));
+		//session.send(jsonBody.resourceSets[0].resources[0].name + "____" + jsonBody.resourceSets[0].resources[0].point.coordinates[1]);
 		//next();
-	})
-	// request.get('http://dev.virtualearth.net/REST/v1/Locations/hamburg?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV')
-	// .on('response', function (error, response, body) {
-		// //var resultSet = JSON.parse(response);
-		// //resultSet.resourceSets[0].resources[0].point.coordinates[0]
-		// session.send(JSON.stringify(body));
-		// //JSON.stringify(response));
-		// next();
-	// });
+	});
 }
 
 if (useEmulator) {
