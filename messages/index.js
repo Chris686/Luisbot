@@ -229,9 +229,9 @@ function getCoordinates(session, args, next) {
 }
 
 function getLocation(session, args, next) {
-    var luisStack = JSON.parse(args);
-    if (luisStack.entities[0].type.startsWith("builtin.geography")) {
-        next({ response: luisStack.entities[0].entity });
+    //var luisStack = JSON.parse(args);
+    if (args.entities[0].type.startsWith("builtin.geography")) {
+        next({ response: args.entities[0].entity });
     } else {
         builder.Prompts.text(session, "You were asking for weather please type in a location!");
     }
