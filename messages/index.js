@@ -136,7 +136,7 @@ function checkSentiment(session, args, next) {
 }
 
 function getWeather(session, args, next){
-	session.send('you asked for weather' + JSON.stringify(args));
+	session.send('you asked for weather' + JSON.stringify(args.entity));
 	// Initialize
 	var forecast = new Forecast({
    		service: 'darksky',
