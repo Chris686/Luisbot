@@ -216,6 +216,13 @@ function getCoordinates(session, args, next) {
 	});
 }
 
+function getLocation(session, args, next){
+	var luisStack = JSON.parse(args);
+	if(luisStack.entities[0].type.startsWith("builtin.geography")){
+		next({ response: luisStack.entities[0].entity});
+	}
+}
+
 if (useEmulator) {
     
     var server = restify.createServer();
