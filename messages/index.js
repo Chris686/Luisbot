@@ -139,7 +139,7 @@ function getWeather(session, args, next) {
     session.send(args.response.entity + '___' + JSON.stringify(args.response.entity));
     session.send(JSON.stringify(session.userData.locations));
     var coords = JSON.parse(JSON.stringify(session.userData.locations[args.response.entity]));
-    session.send(coords.Latitude + "__" + coords.Longitude);
+    session.send(JSON.stringify(coords.Latitude) + "__" + coords.Longitude);
     //var coords = JSON.parse(session.userData.locations[args.response.entity]);
 
     // Initialize
