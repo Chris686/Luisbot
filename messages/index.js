@@ -220,6 +220,7 @@ function getCoordinates(session, args, next) {
         if (Object.keys(map).length > 1) {
             builder.Prompts.choice(session, 'Which Loaction do you mean', map);
         } else {
+            session.send("single Location");
             next({ response: map });
         }
         //session.send(map + "___" + JSON.stringify(map));
