@@ -136,12 +136,12 @@ function checkSentiment(session, args, next) {
 }
 
 function getWeather(session, args, next) {
-    session.send(args.response.entity + '___' + JSON.stringify(args.response.entity));
-    session.send(JSON.stringify(session.userData.locations[args.response.entity]));
-    session.send(session.userData.locations[args.response.entity]);
-    //var coords = JSON.parse(session.userData.locations[args.response.entity]);
+    //session.send(args.response.entity + '___' + JSON.stringify(args.response.entity));
+    //session.send(JSON.stringify(session.userData.locations[args.response.entity]));
+    //session.send(session.userData.locations[args.response.entity]);
+    var coords = JSON.parse(session.userData.locations[args.response.entity]);
 
-    session.send(JSON.stringify(coords) + "__" + coords.Longitude);
+    //session.send(JSON.stringify(coords) + "__" + coords.Longitude);
     //var coords = JSON.parse(session.userData.locations[args.response.entity]);
 
     // Initialize
@@ -157,7 +157,7 @@ function getWeather(session, args, next) {
     });
 
     // Retrieve weather information from coordinates (Sydney, Australia)
-    forecast.get([-33.8683, 151.2086], function(err, weather) {
+    forecast.get([coords.Langitude, Longitude], function(err, weather) {
         if (err)
             return console.dir(err);
         session.send(JSON.stringify(weather));
@@ -209,7 +209,7 @@ function getCoordinates(session, args, next) {
         var choices = "";
         var map = new Object();
         for (var i in jsonBody.resourceSets[0].resources) {
-            map[jsonBody.resourceSets[0].resources[i].name] = '{"Latitude:"' + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + ',"Longitude:"' + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "}";
+            map[jsonBody.resourceSets[0].resources[i].name] = '{"Latitude":' + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + ',"Longitude":' + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "}";
         }
         session.userData.locations = map;
         session.save();
