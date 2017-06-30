@@ -53,9 +53,9 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.send('Hi, none Intent \'%s\'.', session.message.text);
     
 })
-.matches('weather', [
+.matches('weather', (session, args) => { [
 		getCoordinates, getWeather
-])
+]})
 .matches('Greeting', [
 		checkLanguage, checkSentiment, getUserName, setUserName
 	])
