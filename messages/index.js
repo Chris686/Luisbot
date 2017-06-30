@@ -140,9 +140,14 @@ function getWeather(session, args, next) {
     //session.send(JSON.stringify(session.userData.locations[args.response.entity]));
     //session.send(session.userData.locations[args.response.entity]);
     //var coords = session.userData.locations[args.response.entity];
+    var coords;
+    if (args.response.entity != null) {
+        coords = JSON.parse(session.userData.locations[args.response.entity]);
+    } else {
+        coords = JSON.parse(args.response);
+    }
 
-
-    var coords = JSON.parse(session.userData.locations[args.response.entity]);
+    //var coords = JSON.parse(session.userData.locations[args.response.entity]);
     session.send(JSON.stringify(coords) + "__" + coords.Longitude);
     // Initialize
     var forecast = new Forecast({
