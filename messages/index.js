@@ -136,7 +136,7 @@ function checkSentiment(session, args, next) {
 }
 
 function getWeather(session, args, next) {
-    session.send(args.response.entity + '___' + JSON.stringify(args.response.entity));
+    session.send(args.response.entity + '___' + JSON.stringify(args.response));
     //session.send(JSON.stringify(session.userData.locations[args.response.entity]));
     //session.send(session.userData.locations[args.response.entity]);
     //var coords = session.userData.locations[args.response.entity];
@@ -220,7 +220,7 @@ function getCoordinates(session, args, next) {
         if (Object.keys(map).length > 1) {
             builder.Prompts.choice(session, 'Which Loaction do you mean', map);
         } else {
-            //session.send("single Location___" + JSON.stringify(map));
+            session.send("single Location___" + JSON.stringify(map));
             next({ response: map });
         }
         //session.send(map + "___" + JSON.stringify(map));
