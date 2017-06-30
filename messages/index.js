@@ -148,7 +148,7 @@ function getWeather(session, args, next) {
     }
 
     //var coords = JSON.parse(session.userData.locations[args.response.entity]);
-    session.send(JSON.stringify(coords) + "__" + coords.Longitude);
+    //session.send(JSON.stringify(coords) + "__" + coords.Longitude);
     // Initialize
     var forecast = new Forecast({
         service: 'darksky',
@@ -165,7 +165,8 @@ function getWeather(session, args, next) {
     forecast.get([coords.Latitude, coords.Longitude], function(err, weather) {
         if (err)
             return console.dir(err);
-        session.send(JSON.stringify(weather));
+        var username = session.userData.username;
+        session.send(JSON.stringify("The Weather has the following parameters:" + username + weather.currently));
     });
 }
 
