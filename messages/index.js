@@ -139,7 +139,7 @@ function getWeather(session, args, next) {
     //session.send(args.response.entity + '___' + JSON.stringify(args.response.entity));
     //session.send(JSON.stringify(session.userData.locations[args.response.entity]));
     //session.send(session.userData.locations[args.response.entity]);
-    var coords = session.userData.locations[args.response.entity];
+    //var coords = session.userData.locations[args.response.entity];
 
 
     var coords = JSON.parse(session.userData.locations[args.response.entity]);
@@ -157,7 +157,7 @@ function getWeather(session, args, next) {
     });
 
     // Retrieve weather information from coordinates (Sydney, Australia)
-    forecast.get([coords.Langitude, coords.Longitude], function(err, weather) {
+    forecast.get([coords.Latitude, coords.Longitude], function(err, weather) {
         if (err)
             return console.dir(err);
         session.send(JSON.stringify(weather));
