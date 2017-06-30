@@ -138,6 +138,7 @@ function checkSentiment(session, args, next) {
 function getWeather(session, args, next) {
     session.send(args.response.entity + '___' + JSON.stringify(args.response.entity));
     session.send(JSON.stringify(session.userData.locations));
+    session.send(session.userData.locations[args.response.entity]);
     //var coords = JSON.parse(session.userData.locations[args.response.entity]);
 
     // Initialize
