@@ -54,7 +54,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
     })
     .matches('weather', [
-        getCoordinates, getWeather
+        getLocation, getCoordinates, getWeather
     ])
     .matches('Greeting', [
         checkLanguage, checkSentiment, getUserName, setUserName
@@ -143,7 +143,7 @@ function getWeather(session, args, next) {
 
 
     var coords = JSON.parse(session.userData.locations[args.response.entity]);
-    session.send(JSON.stringify(coords) + "__" + coords.Longitude);
+    //session.send(JSON.stringify(coords) + "__" + coords.Longitude);
     // Initialize
     var forecast = new Forecast({
         service: 'darksky',
