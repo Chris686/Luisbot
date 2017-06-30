@@ -141,12 +141,12 @@ function getWeather(session, args, next) {
     //session.send(session.userData.locations[args.response.entity]);
     //var coords = session.userData.locations[args.response.entity];
     var coords;
-    if (args.response.entity != null) {
-        coords = JSON.parse(session.userData.locations[args.response.entity]);
-    } else {
-        session.send(Object.key(args.response)[0]);
-        coords = JSON.parse(args.response[Object.key(args.response)[0]]);
-    }
+    //if (args.response.entity != null) {
+    coords = JSON.parse(session.userData.locations[args.response.entity]);
+    //} else {
+    session.send(Object.key(args.response)[0]);
+    coords = JSON.parse(args.response[Object.key(args.response)[0]]);
+    //}
 
     //var coords = JSON.parse(session.userData.locations[args.response.entity]);
     session.send(JSON.stringify(coords) + "__" + coords.Longitude);
