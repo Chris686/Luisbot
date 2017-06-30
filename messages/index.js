@@ -123,10 +123,10 @@ function checkSentiment(session, args, next) {
             body: jsonBody
         },
         function(error, response, body) {
-            session.send(JSON.stringify(body));
+            //session.send(JSON.stringify(body));
             //console.log(body);
             var answer = JSON.parse(body);
-            session.send(JSON.stringify(answer.documents[0]));
+            session.send("This is the Sentiment Score" + JSON.stringify(answer.documents[0]));
             if (answer.documents[0].score >= 0.5) {
                 next();
             } else {
@@ -166,7 +166,7 @@ function getWeather(session, args, next) {
         if (err)
             return console.dir(err);
         var username = session.userData.username;
-        session.send(JSON.stringify("The Weather has the following parameters:" + username + JSON.stringify(weather.currently)));
+        session.send(JSON.stringify("The Weather has the following parameters:" + username + JSON.stringify(weather.currently, null, '\t')));
     });
 }
 
@@ -178,10 +178,10 @@ function getUserName(session, args, next) {
     session.dialogData.entities = args.entities;
     var username = builder.EntityRecognizer.findEntity(args.entities, 'username');
     if (username) {
-        session.send("Hi " + username + ", How are you1");
+        //session.send("Hi " + username + ", How are you1");
         next({ response: username.entity });
     } else if (session.userData.username) {
-        session.send("Hi " + session.userData.username + ", How are you2");
+        //session.send("Hi " + session.userData.username + ", How are you2");
         next({ response: session.userData.username });
     } else {
         builder.Prompts.text(session, "What is your username?");
@@ -202,7 +202,7 @@ function setUserName(session, args, next) {
 }
 
 function getCoordinates(session, args, next) {
-    session.send(JSON.stringify(args));
+    session.send("Searching for Coordinates to get weather " + JSON.stringify(args));
     var options = {
         url: 'http://dev.virtualearth.net/REST/v1/Locations/' + args.response + '?key=Ahyluw9NpnIGK3I460J6z4Jpb0OpBPjK0RuV6gisXx_qozOX10O91kf2GhLah6mV',
         method: 'GET'
@@ -226,7 +226,7 @@ function getCoordinates(session, args, next) {
         if (Object.keys(map).length > 1) {
             builder.Prompts.choice(session, 'Which Loaction do you mean', map);
         } else {
-            session.send("single Location___" + JSON.stringify(map));
+            //session.send("single Location___" + JSON.stringify(map));
             next({ response: map });
         }
         //session.send(map + "___" + JSON.stringify(map));
@@ -241,7 +241,7 @@ function getLocation(session, args, next) {
     if (args.entities != null & args.entities.length && args.entities[0].type.startsWith("builtin.geography")) {
         next({ response: args.entities[0].entity });
     } else {
-        builder.Prompts.text(session, "You were asking for weather please type in a location!");
+        builder.Prompts.text(session, "Hey " + session.userData.username + ", You were asking for weather please type in a location!");
     }
 }
 
