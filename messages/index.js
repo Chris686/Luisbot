@@ -144,8 +144,8 @@ function getWeather(session, args, next) {
     if (args.response.entity != null) {
         coords = JSON.parse(session.userData.locations[args.response.entity]);
     } else {
-        session.send(Object.keys(args.response)[0]);
-        coords = JSON.parse(Object.keys(args.response)[0]);
+        session.send(Object.value(args.response)[0]);
+        coords = JSON.parse(Object.value(args.response)[0]);
     }
 
     //var coords = JSON.parse(session.userData.locations[args.response.entity]);
