@@ -166,7 +166,7 @@ function getWeather(session, args, next) {
         if (err)
             return console.dir(err);
         var username = session.userData.username;
-        session.send(JSON.stringify("The Weather has the following parameters:" + username + weather.currently));
+        session.send(JSON.stringify("The Weather has the following parameters:" + username + JSON.stringify(weather.currently)));
     });
 }
 
