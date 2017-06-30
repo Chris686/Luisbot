@@ -205,6 +205,10 @@ function getCoordinates(session, args, next) {
 		for (var i in jsonBody.resourceSets[0].resources) {
 			map[jsonBody.resourceSets[0].resources[i].name] = "{Latitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + ",Longitude:" + jsonBody.resourceSets[0].resources[0].point.coordinates[0] + "}";
 		}
+		if(Object..keys(map).length <= 0){
+			session.endDialog("This is no valid location, please try again");
+		}
+		
 		if (Object.keys(map).length > 1) {
 			builder.Prompts.choice(session, 'Which Loaction do you mean', map);
 		} else {
@@ -220,6 +224,8 @@ function getLocation(session, args, next){
 	var luisStack = JSON.parse(args);
 	if(luisStack.entities[0].type.startsWith("builtin.geography")){
 		next({ response: luisStack.entities[0].entity});
+	}else{
+		builder.Prompts.text(session, "You were asking for weather please type in a location!");
 	}
 }
 
